@@ -2,14 +2,14 @@ import java.awt.*;
 
 public class Volvo240{
 
-    public final static double trimFactor = 1.25;
-    public int nrDoors; // Number of doors on the car
-    public double enginePower; // Engine power of the car
-    public double currentSpeed; // The current speed of the car
-    public Color color; // Color of the car
-    public String modelName; // The car model name
+    private final static double trimFactor = 1.25;
+    // DONE public int nrDoors; // Number of doors on the car
+    // DONE public double enginePower; // Engine power of the car
+    // DONE public double currentSpeed; // The current speed of the car
+    // DONE public Color color; // Color of the car
+    // DONE public String modelName; // The car model name
     
-    public Volvo240(){
+    private Volvo240(){
         nrDoors = 4;
         color = Color.black;
         enginePower = 100;
@@ -17,30 +17,31 @@ public class Volvo240{
         stopEngine();
     }
     
-    public int getNrDoors(){
+    /* DONE  public int getNrDoors(){
         return nrDoors;
-    }
-    public double getEnginePower(){
+    } */
+
+    /* DONE public double getEnginePower(){
         return enginePower;
-    }
+    } */
 
-    public double getCurrentSpeed(){
+    /* DONE public double getCurrentSpeed(){
         return currentSpeed;
-    }
+    } */
 
-    public Color getColor(){
+    /* DONE public Color getColor(){
         return color;
-    }
+    } */
 
-    public void setColor(Color clr){
+    /* DONE public void setColor(Color clr){
 	    color = clr;
-    }
+    } */
 
-    public void startEngine(){
+    /* DONE public void startEngine(){
 	    currentSpeed = 0.1;
-    }
+    }*/
 
-    public void stopEngine(){
+    /* DONE public void stopEngine(){
 	    currentSpeed = 0;
     }
     
@@ -52,17 +53,17 @@ public class Volvo240{
 	    currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
-    public void decrementSpeed(double amount){
+    private void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
     // TODO fix this method according to lab pm
-    public void gas(double amount){
+    private void gas(double amount){
         incrementSpeed(amount);
     }
 
     // TODO fix this method according to lab pm
-    public void brake(double amount){
+    private void brake(double amount){
         decrementSpeed(amount);
     }
 }

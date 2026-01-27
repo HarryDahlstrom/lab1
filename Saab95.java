@@ -2,12 +2,12 @@ import java.awt.*;
 
 public class Saab95{
 
-    public boolean turboOn;
-    public int nrDoors; // Number of doors on the car
-    public double enginePower; // Engine power of the car
-    public double currentSpeed; // The current speed of the car
-    public Color color; // Color of the car
-    public String modelName; // The car model name
+    private boolean turboOn;
+    // public int nrDoors; // Number of doors on the car
+    // public double enginePower; // Engine power of the car
+    // public double currentSpeed; // The current speed of the car
+    // public Color color; // Color of the car
+    // public String modelName; // The car model name
     
     public Saab95(){
         nrDoors = 2;
@@ -17,11 +17,12 @@ public class Saab95{
         modelName = "Saab95";
         stopEngine();
     }
-    
-    public int getNrDoors(){
+
+    /* public int getNrDoors(){
         return nrDoors;
-    }
-    public double getEnginePower(){
+    } */
+
+    /* public double getEnginePower(){
         return enginePower;
     }
 
@@ -45,13 +46,15 @@ public class Saab95{
 	    currentSpeed = 0;
     }
 
-    public void setTurboOn(){
+    public void setTurboOn(){ // unik
 	    turboOn = true;
     }
 
-    public void setTurboOff(){
+    public void setTurboOff(){ // unik
 	    turboOn = false;
     }
+
+    // Nedanför är unika
     
     public double speedFactor(){
         double turbo = 1;
