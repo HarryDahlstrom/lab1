@@ -59,6 +59,6 @@ abstract class LeCar implements Movable{
     }
     @Override
     public void turnRight() {
-
+        // Same as turnLeft but right :D
     }
 }
