@@ -25,41 +25,67 @@ abstract class LeCar implements Movable{
         return enginePower;
     }
 
-    public  int getNrDoors(){
+    protected int getNrDoors(){
         return nrDoors;
     }
 
-    public double getCurrentSpeed(){
+    protected double getCurrentSpeed(){
         return currentSpeed;
     }
 
-    public Color getColor(){
+    protected Color getColor(){
         return color;
     }
 
-    public void setColor(Color clr){
+    protected void setColor(Color clr){
         color = clr;
     }
 
-    public void startEngine(){
+    protected void startEngine(){
         currentSpeed = 0.1;
     }
 
-    public void stopEngine(){
+    protected void stopEngine(){
         currentSpeed = 0;
+    }
+
+    protected abstract double speedFactor();
+
+    protected void incrementSpeed(double amount){
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+    }
+
+    protected void decrementSpeed(double amount){
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+    }
+
+    protected void gas(double amount){
+        if (amount <= 1 && amount >= 0 ){
+            incrementSpeed(amount);
+        }
+    }
+
+    protected void brake(double amount){
+        if (amount <= 1 && amount >= 0 ){
+            decrementSpeed(amount);
+        }
     }
 
 
 
     @Override
     public void move() {
-        if (direction == 1) { // East
+        // 2 = North, 1 = West, 0 = South, -1 = East //
+        if (direction == 1) { // West
             currentXPosition += currentSpeed;
-        } else if (direction == -1) { // West
+        }
+        else if (direction == -1) { // East
             currentXPosition -= currentSpeed;
-        } else if (direction == 2) { // North
+        }
+        else if (direction == 2) { // North
             currentYPosition += currentSpeed;
-        } else if (direction == 0) { // South
+        }
+        else if (direction == 0) {// South
             currentYPosition -= currentSpeed;
         }
     }
@@ -67,16 +93,15 @@ abstract class LeCar implements Movable{
     @Override
     public void turnLeft() {
         direction -= 1;
-        if (direction < -1){
+        if (direction < -1) {
             direction = 2;
         }
-
     }
 
     @Override
     public void turnRight() {
         direction += 1;
-        if (direction > 2){
+        if (direction > 2) {
             direction = -1;
         }
     }

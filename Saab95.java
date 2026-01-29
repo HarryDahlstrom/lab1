@@ -20,59 +20,37 @@ public class Saab95 extends LeCar {
         stopEngine();
     }
 
-     /*public  int getNrDoors(){
-        return nrDoors;
-    }
-
-     public  double getCurrentSpeed(){
-        return currentSpeed;
-    }
-
-     public  Color getColor(){
-        return color;
-    }
-
-     public  void setColor(Color clr){
-	    color = clr;
-    }
-
-     public  void startEngine(){
-	    currentSpeed = 0.1;
-    }
-
-     public  void stopEngine(){
-	    currentSpeed = 0;
-    }*/
-
-    public  void setTurboOn(){ // unik
+    protected void setTurboOn(){ // unik
 	    turboOn = true;
     }
 
-    public  void setTurboOff(){ // unik
+    protected void setTurboOff(){ // unik
 	    turboOn = false;
     }
 
-    public  double speedFactor(){ // unik
+    //
+    @Override
+    protected double speedFactor(){ // unik
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;
     }
 
-    public  void incrementSpeed(double amount){
-        /*if ( getEnginePower() >= (getCurrentSpeed() + speedFactor() * amount)){
+/*    protected void incrementSpeed(double amount){
+        if ( getEnginePower() > (getCurrentSpeed() + speedFactor() * amount)){
             currentSpeed = getCurrentSpeed() + speedFactor() * amount;
         }*/
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
-    public  void decrementSpeed(double amount){
-        if ( 0 <= (getCurrentSpeed() + speedFactor() * amount)){
+    protected void decrementSpeed(double amount){
+        if ( 0 < (getCurrentSpeed() + speedFactor() * amount)){
             currentSpeed = getCurrentSpeed() + speedFactor() * amount;
         }
     }
 
     // TODO fix this method according to lab pm
-    public  void gas(double amount){
+    protected void gas(double amount){
         if (amount <= 1 && amount >= 0 ){
             if (getCurrentSpeed() < getEnginePower() && getCurrentSpeed() > 0) {
                 incrementSpeed(amount);
@@ -81,13 +59,9 @@ public class Saab95 extends LeCar {
     }
 
     // TODO fix this method according to lab pm
-    public  void brake(double amount){
+    protected void brake(double amount){
         if (amount <= 1 && amount >= 0 ){
             decrementSpeed(amount);
         }
-    }
-
-
-
-
+    }*/
 }

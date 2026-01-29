@@ -50,23 +50,5 @@ public class Volvo240 extends LeCar {
     public double speedFactor(){
         return enginePower * 0.01 * trimFactor;
     }
-
-    public void incrementSpeed(double amount){
-	    currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
-    }
-
-    private void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-    }
-
-    // TODO fix this method according to lab pm
-    private void gas(double amount){
-        incrementSpeed(amount);
-    }
-
-    // TODO fix this method according to lab pm
-    private void brake(double amount){
-        decrementSpeed(amount);
-    }
 }
 

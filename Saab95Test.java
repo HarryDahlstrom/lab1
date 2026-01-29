@@ -9,7 +9,7 @@ class Saab95Test {
     private Saab95 saab95;
 
     @BeforeEach
-    public void before() {
+    protected void before() {
         saab95 = new Saab95();
     }
 
@@ -18,17 +18,21 @@ class Saab95Test {
     }
 
     @Test
-    public void startEngine() {
+    protected void startEngine() {
         saab95.startEngine();
         assertTrue(0 < saab95.getCurrentSpeed());
     }
 
     @Test
-    public void stopEngine() {
+    protected void stopEngine() {
+        saab95.startEngine();
+        assertTrue(0 < saab95.getCurrentSpeed());
+        saab95.stopEngine();
+        assertEquals(0, saab95.getCurrentSpeed());
     }
 
     @Test
-    public void setTurboOn() {
+    protected void setTurboOn() {
         saab95.setTurboOn();
         assertTrue(saab95.turboOn);
     }
@@ -49,24 +53,35 @@ class Saab95Test {
     }
 
     @Test
-    public void decrementSpeed() {
+    protected void decrementSpeed() {
+        saab95.incrementSpeed(0);
+        assertEquals(0, Saab95.currentSpeed);
+        Saab95.currentSpeed = 1;
+        saab95.incrementSpeed(1);
+        assertNotEquals(0, Saab95.currentSpeed);
+
     }
 
     @Test
-    public void gas() {
+    protected void gas() {
         saab95.startEngine();
         saab95.gas(0.5);
-        System.out.println(saab95.getEnginePower());
-        System.out.println(saab95.getCurrentSpeed());
         double oldSpeed = saab95.getCurrentSpeed();
-        System.out.println(saab95.getCurrentSpeed());
         saab95.gas(1);
         assertNotEquals(oldSpeed, saab95.getCurrentSpeed());
-        System.out.println(saab95.currentSpeed);
-        // incrementSpeed(amount)
     }
 
     @Test
-    void brake() {
+    protected void brake() {
+        saab95.startEngine();
+        saab95.brake(0.01);
+        double oldSpeed = saab95.getCurrentSpeed(); // > 0
+        saab95.brake(1);
+        assertNotEquals(oldSpeed, saab95.getCurrentSpeed());
+
+        saab95.brake(0.5);
+        oldSpeed = saab95.getCurrentSpeed(); // Expected to give 0
+        saab95.brake(1);
+        assertEquals(oldSpeed, saab95.getCurrentSpeed());
     }
 }
