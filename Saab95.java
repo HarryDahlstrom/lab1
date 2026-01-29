@@ -2,7 +2,8 @@ import java.awt.*;
 
 public class Saab95 extends LeCar {
     // I HATE THIS PROGRAMI HATE THIS PROGRAMII HATE THIS PROGRAMI HATE THIS PROGRAMI HATE THIS PROGRAM AHHHH
-    private boolean turboOn;
+    public boolean turboOn;
+
     // public int nrDoors; // Number of doors on the car
     // public double enginePower; // Engine power of the car
     // public double currentSpeed; // The current speed of the car
@@ -10,73 +11,83 @@ public class Saab95 extends LeCar {
     // public String modelName; // The car model name
     
     public Saab95(){
-        nrDoors = 2;
+        /*nrDoors = 2;
         color = Color.red;
         enginePower = 125;
-	    turboOn = false;
-        modelName = "src.Saab95";
+        modelName = "Saab95";*/
+        super(2,Color.red, 125,"Saab95");
+        turboOn = false;
         stopEngine();
     }
 
-    /* public int getNrDoors(){
+     /*public  int getNrDoors(){
         return nrDoors;
-    } */
+    }
 
-    /* public double getEnginePower(){
-        return enginePower;
-    } */
-
-    /* public double getCurrentSpeed(){
+     public  double getCurrentSpeed(){
         return currentSpeed;
-    } */
+    }
 
-    /* public Color getColor(){
+     public  Color getColor(){
         return color;
-    } */
+    }
 
-    /* public void setColor(Color clr){
+     public  void setColor(Color clr){
 	    color = clr;
-    } */
+    }
 
-    /* public void startEngine(){
+     public  void startEngine(){
 	    currentSpeed = 0.1;
-    } */
+    }
 
-    /* public void stopEngine(){
+     public  void stopEngine(){
 	    currentSpeed = 0;
-    } */
+    }*/
 
-    public void setTurboOn(){ // unik
+    public  void setTurboOn(){ // unik
 	    turboOn = true;
     }
 
-    public void setTurboOff(){ // unik
+    public  void setTurboOff(){ // unik
 	    turboOn = false;
     }
 
-    // Nedanför är unika
-    
-    public double speedFactor(){ // unik
+    public  double speedFactor(){ // unik
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;
     }
 
-    public void incrementSpeed(double amount){
+    public  void incrementSpeed(double amount){
+        /*if ( getEnginePower() >= (getCurrentSpeed() + speedFactor() * amount)){
+            currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        }*/
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
-    public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
-    
-    // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
+    public  void decrementSpeed(double amount){
+        if ( 0 <= (getCurrentSpeed() + speedFactor() * amount)){
+            currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        }
     }
 
     // TODO fix this method according to lab pm
-    public void brake(double amount){
-        decrementSpeed(amount);
+    public  void gas(double amount){
+        if (amount <= 1 && amount >= 0 ){
+            if (getCurrentSpeed() < getEnginePower() && getCurrentSpeed() > 0) {
+                incrementSpeed(amount);
+            }
+        }
     }
+
+    // TODO fix this method according to lab pm
+    public  void brake(double amount){
+        if (amount <= 1 && amount >= 0 ){
+            decrementSpeed(amount);
+        }
+    }
+
+
+
+
 }
