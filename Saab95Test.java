@@ -10,10 +10,8 @@ class Saab95Test {
 
     @BeforeEach
     public void before() {
-
         saab95 = new Saab95();
     }
-
 
     @Test
     void setColor() {
@@ -31,7 +29,7 @@ class Saab95Test {
 
     @Test
     public void setTurboOn() {
-        setTurboOn();
+        saab95.setTurboOn();
         assertTrue(saab95.turboOn);
     }
 
@@ -63,7 +61,7 @@ class Saab95Test {
         double oldSpeed = saab95.getCurrentSpeed();
         System.out.println(saab95.getCurrentSpeed());
         saab95.gas(1);
-        assertEquals(oldSpeed, saab95.getCurrentSpeed());
+        assertNotEquals(oldSpeed, saab95.getCurrentSpeed());
         System.out.println(saab95.currentSpeed);
         // incrementSpeed(amount)
     }
@@ -72,4 +70,3 @@ class Saab95Test {
     void brake() {
     }
 }
-
