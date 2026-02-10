@@ -6,7 +6,7 @@ public class Scania extends LeCar {
 
     // TODO Constructor below //
     protected Scania() {
-        super(2,Color.green,420,"Scania");
+        super(2,Color.green,420,"Scania", "Truck");
         currentAngle = 0;
         stopEngine();
     }

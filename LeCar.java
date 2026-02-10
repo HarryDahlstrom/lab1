@@ -11,13 +11,15 @@ abstract class LeCar implements Movable{
     protected static int direction;
     protected static double currentXPosition;
     protected static double currentYPosition;
+    protected String type;
 
     // Constructor below //
-    protected LeCar(int nrDoors, Color color, double enginePower, String modelName){
+    protected LeCar(int nrDoors, Color color, double enginePower, String modelName, String type){
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
+        this.type = type;
     }
 
     // Functions for both vehicles //

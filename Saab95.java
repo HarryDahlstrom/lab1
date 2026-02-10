@@ -6,7 +6,7 @@ public class Saab95 extends LeCar {
 
     // Constructor below //
     protected Saab95(){
-        super(2,Color.red, 125,"Saab95");
+        super(2,Color.red, 125,"Saab95", "Car");
         turboOn = false;
         stopEngine();
     }
