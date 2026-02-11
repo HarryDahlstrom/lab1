@@ -27,19 +27,19 @@ class Volvo240Test {
     @Test
     protected void incrementSpeed() {
         volvo240.incrementSpeed(volvo240.getEnginePower() + 1);
-        assertEquals(volvo240.enginePower, Volvo240.currentSpeed);
-        Volvo240.currentSpeed = 0;
+        assertEquals(volvo240.enginePower, volvo240.currentSpeed);
+        volvo240.currentSpeed = 0;
         volvo240.incrementSpeed(0);
-        assertNotEquals(volvo240.enginePower, Volvo240.currentSpeed);
+        assertNotEquals(volvo240.enginePower, volvo240.currentSpeed);
     }
 
     @Test
     protected void decrementSpeed() {
         volvo240.incrementSpeed(0);
-        assertEquals(0, Volvo240.currentSpeed);
-        Volvo240.currentSpeed = 1;
+        assertEquals(0, volvo240.currentSpeed);
+        volvo240.currentSpeed = 1;
         volvo240.incrementSpeed(1);
-        assertNotEquals(0, Volvo240.currentSpeed);
+        assertNotEquals(0, volvo240.currentSpeed);
     }
 
     @Test

@@ -43,13 +43,13 @@ public class ScaniaTransport<C extends LeCar> extends LeCar {
 
     protected void unloadtransport() {
         if (rampOn) {
-            C unloadingCar = carsOnTransport.getLast();
-            unloadingCar.currentYPosition = this.currentYPosition - 1;
-            unloadingCar.currentXPosition = this.currentXPosition;
+            if (!carsOnTransport.isEmpty()) {
+                C unloadingCar = carsOnTransport.getLast();
+                unloadingCar.currentYPosition = this.currentYPosition - 1;
+                unloadingCar.currentXPosition = this.currentXPosition;
 
-
-            carsOnTransport.removeLast();
-
+                carsOnTransport.removeLast();
+            }
         }
     }
 

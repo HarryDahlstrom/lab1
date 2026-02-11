@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class Carish extends LeCar {
 
     protected Carish() {
-        super(2, Color.red, 240, "ZeCar");
+        super(2, Color.red, 240, "ZeCar", "Car");
     }
 
     @Override
@@ -27,59 +27,59 @@ class LeCarTest {
 
     @Test
     public void move() {
-         /// SKA ÄNDRAS HEHEHEHEHE
-        LeCar.direction = 1;
-        LeCar.currentSpeed = 0.5;
-        lecar.move();
-        double oldPos = LeCar.currentXPosition;
-        lecar.move();
-        assertEquals(LeCar.currentXPosition, LeCar.currentSpeed + oldPos);
 
-        LeCar.direction = -1;
-        LeCar.currentSpeed = 0.5;
+        lecar.direction = 1;
+        lecar.currentSpeed = 0.5;
         lecar.move();
-        oldPos = LeCar.currentXPosition;
+        double oldPos = lecar.currentXPosition;
         lecar.move();
-        assertEquals(LeCar.currentXPosition, LeCar.currentSpeed - oldPos);
+        assertEquals(lecar.currentXPosition, lecar.currentSpeed + oldPos);
 
-        LeCar.direction = 2;
-        LeCar.currentSpeed = 0.5;
+        lecar.direction = -1;
+        lecar.currentSpeed = 0.5;
         lecar.move();
-        oldPos = LeCar.currentYPosition;
+        oldPos = lecar.currentXPosition;
         lecar.move();
-        assertEquals(LeCar.currentYPosition, LeCar.currentSpeed + oldPos);
+        assertEquals(lecar.currentXPosition, lecar.currentSpeed - oldPos);
 
-        LeCar.direction = 0;
-        LeCar.currentSpeed = 0.5;
+        lecar.direction = 2;
+        lecar.currentSpeed = 0.5;
         lecar.move();
-        oldPos = LeCar.currentYPosition;
+        oldPos = lecar.currentYPosition;
+        lecar.move();
+        assertEquals(lecar.currentYPosition, lecar.currentSpeed + oldPos);
+
+        lecar.direction = 0;
+        lecar.currentSpeed = 0.5;
+        lecar.move();
+        // oldPos = lecar.currentYPosition;
         lecar.move();
 
     }
 
     @Test
     public void turnLeft() {
-        LeCar.direction = 0;
+        lecar.direction = 0;
         lecar.turnLeft();
-        assertEquals(-1, LeCar.direction);
+        assertEquals(-1, lecar.direction);
         lecar.turnLeft();
-        assertEquals(2, LeCar.direction);
+        assertEquals(2, lecar.direction);
         lecar.turnLeft();
-        assertEquals(1, LeCar.direction);
+        assertEquals(1, lecar.direction);
         lecar.turnLeft();
-        assertEquals(0, LeCar.direction);
+        assertEquals(0, lecar.direction);
     }
 
     @Test
     public void turnRight() {
-        LeCar.direction = 0;
+        lecar.direction = 0;
         lecar.turnRight();
-        assertEquals(1, LeCar.direction);
+        assertEquals(1, lecar.direction);
         lecar.turnRight();
-        assertEquals(2, LeCar.direction);
+        assertEquals(2, lecar.direction);
         lecar.turnRight();
-        assertEquals(-1, LeCar.direction);
+        assertEquals(-1, lecar.direction);
         lecar.turnRight();
-        assertEquals(0, LeCar.direction);
+        assertEquals(0, lecar.direction);
     }
 }

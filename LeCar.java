@@ -5,12 +5,12 @@ abstract class LeCar implements Movable{
     // Global variables //
     protected int nrDoors;
     protected double enginePower;
-    protected static double currentSpeed;
+    protected double currentSpeed;
     protected Color color;
     protected String modelName;
-    protected static int direction;
-    protected static double currentXPosition;
-    protected static double currentYPosition;
+    protected int direction;
+    protected double currentXPosition;
+    protected double currentYPosition;
     protected String type;
 
     // Constructor below //

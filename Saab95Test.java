@@ -54,22 +54,22 @@ class Saab95Test {
     @Test
     protected void incrementSpeed() {
         saab95.incrementSpeed(saab95.getEnginePower() + 1);
-        assertEquals(saab95.enginePower, Saab95.currentSpeed);
+        assertEquals(saab95.enginePower, saab95.currentSpeed);
 
-        Saab95.currentSpeed = 0.1;
+        saab95.currentSpeed = 0.1;
         saab95.incrementSpeed(0);
-        assertNotEquals(saab95.enginePower, Saab95.currentSpeed);
+        assertNotEquals(saab95.enginePower, saab95.currentSpeed);
     }
 
     @Test
     protected void decrementSpeed() {
-        Saab95.currentSpeed = 1;
+        saab95.currentSpeed = 1;
         saab95.decrementSpeed(0);
-        assertEquals(1, Saab95.currentSpeed);
+        assertEquals(1, saab95.currentSpeed);
 
-        Saab95.currentSpeed = 1;
+        saab95.currentSpeed = 1;
         saab95.decrementSpeed(1);
-        assertEquals(0, Saab95.currentSpeed);
+        assertEquals(0, saab95.currentSpeed);
 
     }
 

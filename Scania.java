@@ -18,6 +18,7 @@ public class Scania extends LeCar {
                 currentAngle = (currentAngle + angleIncrement);
             }
         }
+
     }
 
     @Override
