@@ -31,23 +31,23 @@ class LeCarTest {
         lecar.direction = 1;
         lecar.currentSpeed = 0.5;
         lecar.move();
-        double oldPos = lecar.currentXPosition;
+        double oldPos = lecar.getX();
         lecar.move();
-        assertEquals(lecar.currentXPosition, lecar.currentSpeed + oldPos);
+        assertEquals(lecar.getX(), lecar.currentSpeed + oldPos);
 
         lecar.direction = -1;
         lecar.currentSpeed = 0.5;
         lecar.move();
-        oldPos = lecar.currentXPosition;
+        oldPos = lecar.getX();
         lecar.move();
-        assertEquals(lecar.currentXPosition, lecar.currentSpeed - oldPos);
+        assertEquals(lecar.getX(), lecar.currentSpeed - oldPos);
 
         lecar.direction = 2;
         lecar.currentSpeed = 0.5;
         lecar.move();
-        oldPos = lecar.currentYPosition;
+        oldPos = lecar.getY();
         lecar.move();
-        assertEquals(lecar.currentYPosition, lecar.currentSpeed + oldPos);
+        assertEquals(lecar.getY(), lecar.currentSpeed + oldPos);
 
         lecar.direction = 0;
         lecar.currentSpeed = 0.5;

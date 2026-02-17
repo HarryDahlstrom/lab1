@@ -28,24 +28,24 @@ class ScaniaTransportTest {
     void loadUnloadtransport() {
         volvo240 = new Volvo240();
         saab95 = new Saab95();
-        volvo240.currentYPosition = scaniaTransport.currentYPosition - 1;
-        volvo240.currentXPosition = scaniaTransport.currentXPosition;
+        volvo240.setY(scaniaTransport.getY() - 1);
+        volvo240.setX(scaniaTransport.getX());
         scaniaTransport.rampOn = true;
 
         int var = scaniaTransport.carsOnTransport.size();
         scaniaTransport.loadtransport(volvo240);
         int var2 =  scaniaTransport.carsOnTransport.size();
         assertNotEquals(var, var2);
-        assertEquals(scaniaTransport.currentYPosition, volvo240.currentYPosition);
+        assertEquals(scaniaTransport.getY(), volvo240.getY());
 
         scaniaTransport.direction = 1;
         scaniaTransport.move();
-        assertEquals(scaniaTransport.currentXPosition, volvo240.currentXPosition);
-        assertEquals(scaniaTransport.currentYPosition, volvo240.currentYPosition);
+        assertEquals(scaniaTransport.getX(), volvo240.getX());
+        assertEquals(scaniaTransport.getY(), volvo240.getY());
 
         scaniaTransport.unloadtransport();
 
-        assertNotEquals(volvo240.currentYPosition, scaniaTransport.currentYPosition);
+        assertNotEquals(volvo240.getY(), scaniaTransport.getY());
         int var3 = scaniaTransport.carsOnTransport.size();
         assertNotEquals(var2, var3);
 

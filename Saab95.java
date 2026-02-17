@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Saab95 extends LeCar {
+public class Saab95 extends LeCar implements ITurbo {
 
     protected boolean turboOn;
 
@@ -11,18 +11,20 @@ public class Saab95 extends LeCar {
         stopEngine();
     }
 
-    protected void setTurboOn(){ // unik
+    @Override
+    public void setTurboOn(){ // unik
 	    turboOn = true;
     }
 
-    protected void setTurboOff(){ // unik
+    @Override
+    public void setTurboOff(){ // unik
 	    turboOn = false;
     }
 
     @Override
     protected double speedFactor(){ // unik
         double turbo = 1;
-        if(turboOn) turbo = 1.3;
+        if(turboOn) turbo = 130;
         return enginePower * 0.01 * turbo;
     }
 }

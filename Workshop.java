@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Workshop<C extends ILEcarWorkshop> {
 
@@ -22,9 +23,9 @@ public class Workshop<C extends ILEcarWorkshop> {
 
     // functions //
     protected void addCar(C clientCar){
-        clientCar.setX();
+
         if (specializedWorkshop == true) {
-            if (clientCar.modelName == carModel && emptySpots != nrCars){
+            if (clientCar.modelName.equals(carModel) && emptySpots != nrCars){
                 emptySpots += 1;
                 carsInWorkshop.add(clientCar);
             }

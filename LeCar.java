@@ -59,7 +59,6 @@ abstract class LeCar implements Movable, ILEcarWorkshop{
         return this.currentYPosition;
     }
 
-
     public void setX(double x){
         this.currentXPosition = x;
     }

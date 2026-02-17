@@ -62,18 +62,18 @@ public class ScaniaTransport<C extends LeCar> extends LeCar {
     @Override
     public void move() {
         if (direction == 1) {
-            setX() += currentSpeed;
+            setX(getX() + currentSpeed);
         } else if (direction == -1) {
-            setX() = setX() - currentSpeed;
+            setX(getX() - currentSpeed);
         } else if (direction == 2) {
-            setY() += currentSpeed;
+            setY(getY() + currentSpeed);
         } else if (direction == 0) {
-            setY() = setY() - currentSpeed;
+            setY(getY() - currentSpeed);
         }
 
         for (C car : carsOnTransport) {
-            car.setX() = this.getX();
-            car.setY() = this.getY();
+            car.setX(this.getX());
+            car.setY(this.getY());
         }
 
     }
