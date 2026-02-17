@@ -1,6 +1,6 @@
 import java.awt.*;
 
-abstract class LeCar implements Movable{
+abstract class LeCar implements Movable, ILEcarWorkshop{
 
     // Global variables //
     protected int nrDoors;
@@ -9,8 +9,8 @@ abstract class LeCar implements Movable{
     protected Color color;
     protected String modelName;
     protected int direction;
-    protected double currentXPosition;
-    protected double currentYPosition;
+    private double currentXPosition;
+    private double currentYPosition;
     protected String type;
 
     // Constructor below //
@@ -50,6 +50,24 @@ abstract class LeCar implements Movable{
     protected void stopEngine(){
         currentSpeed = 0;
     }
+
+    public double getX(){
+        return this.currentXPosition;
+    }
+
+    public double getY(){
+        return this.currentYPosition;
+    }
+
+
+    public void setX(double x){
+        this.currentXPosition = x;
+    }
+
+    public void setY(double y){
+        this.currentYPosition = y;
+    }
+
 
     protected abstract double speedFactor();
 

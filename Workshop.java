@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Workshop<C extends LeCar> {
+public class Workshop<C extends ILEcarWorkshop> {
 
 
     // Global variables //
@@ -22,6 +22,7 @@ public class Workshop<C extends LeCar> {
 
     // functions //
     protected void addCar(C clientCar){
+        clientCar.setX();
         if (specializedWorkshop == true) {
             if (clientCar.modelName == carModel && emptySpots != nrCars){
                 emptySpots += 1;

@@ -30,11 +30,11 @@ public class ScaniaTransport<C extends LeCar> extends LeCar {
     protected void loadtransport(C car) {
         if (rampOn) {
             if (Objects.equals(car.type, "Car")) {
-                if (this.currentYPosition - car.currentYPosition == 1 &&
-                        this.currentXPosition - car.currentXPosition == 0) {
+                if (this.getY() - car.getY() == 1 &&
+                        this.getX() - car.getX() == 0) {
                     carsOnTransport.add(car);
-                    car.currentYPosition = this.currentYPosition;
-                    car.currentXPosition = this.currentXPosition;
+                    car.setY(this.getY());
+                    car.setX(this.getX());
                 }
             }
         }
@@ -45,8 +45,8 @@ public class ScaniaTransport<C extends LeCar> extends LeCar {
         if (rampOn) {
             if (!carsOnTransport.isEmpty()) {
                 C unloadingCar = carsOnTransport.getLast();
-                unloadingCar.currentYPosition = this.currentYPosition - 1;
-                unloadingCar.currentXPosition = this.currentXPosition;
+                unloadingCar.setY(this.getY() - 1);
+                unloadingCar.setX(this.getX());
 
                 carsOnTransport.removeLast();
             }
@@ -62,18 +62,18 @@ public class ScaniaTransport<C extends LeCar> extends LeCar {
     @Override
     public void move() {
         if (direction == 1) {
-            currentXPosition += currentSpeed;
+            setX() += currentSpeed;
         } else if (direction == -1) {
-            currentXPosition = currentXPosition - currentSpeed;
+            setX() = setX() - currentSpeed;
         } else if (direction == 2) {
-            currentYPosition += currentSpeed;
+            setY() += currentSpeed;
         } else if (direction == 0) {
-            currentYPosition = currentYPosition - currentSpeed;
+            setY() = setY() - currentSpeed;
         }
 
         for (C car : carsOnTransport) {
-            car.currentXPosition = this.currentXPosition;
-            car.currentYPosition = this.currentYPosition;
+            car.setX() = this.getX();
+            car.setY() = this.getY();
         }
 
     }
