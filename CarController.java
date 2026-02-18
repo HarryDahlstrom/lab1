@@ -13,15 +13,52 @@ import java.util.Objects;
 public class CarController<ACar extends LeCar> {
     // member fields:
 
+    private DrawPanel panel;
+
+
+    public CarController(DrawPanel panel) {
+        this.panel = panel;
+    }
+
+    public CarController() {
+    }
+
     private void Collision() {
-        for (ACar car : cars) {
-            if ( 800 <= car.getX() || car.getX() <= 0 ||  800 <= car.getY()  || car.getY() <= 0) {
+        int planeWidth = frame.drawPanel.getPanelWidth();
+        int planeHeight = frame.drawPanel.getPanelHeight();
+
+        for (int i = 0; i < cars.size(); i++) {
+            ACar car = cars.get(i);
+
+            int carWidth = frame.drawPanel.images.get(i).getWidth();
+            int carHeight = frame.drawPanel.images.get(i).getHeight();
+
+            boolean collided = false;
+
+            // X axis
+            if (car.getX() < 0) {
+                car.setX(0);
+                collided = true;
+            }
+            if (car.getX() > planeWidth - carWidth) {
+                car.setX(planeWidth - carWidth);
+                collided = true;
+            }
+
+            // Y axis
+            if (car.getY() < 0) {
+                car.setX(0);
+                collided = true;
+            }
+            if (car.getY() > planeHeight - carHeight) {
+                car.setY(planeHeight - carHeight);
+                collided = true;
+            }
+
+            // Turn around
+            if (collided) {
                 car.turnLeft();
                 car.turnLeft();
-                if (car.getX() <= 0) car.setX(1);
-                if (car.getX() >= 800) car.setX(799);
-                if (car.getY() <= 0) car.setY(1);
-                if (car.getY() >= 800) car.setY(799);
             }
         }
     }
@@ -34,6 +71,10 @@ public class CarController<ACar extends LeCar> {
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
+
+    public void setView(CarView frame){
+        this.frame = frame;
+    }
     // A list of cars, modify if needed
     ArrayList<ACar> cars = new ArrayList<>();
 
@@ -41,18 +82,36 @@ public class CarController<ACar extends LeCar> {
 
     public static void main(String[] args) {
         // Instance of this class
-        CarController cc = new CarController();
+        CarController<LeCar> cc = new CarController<>();
+
 
         //
         cc.cars.add(new Volvo240());
         cc.cars.add(new Saab95());
+        cc.cars.add(new Scania());
+
+        for (int i = 0; i < cc.cars.size(); i++) {
+            cc.cars.get(i).setY(i * 100);
+        }
+
+
 
 
         // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
+        CarView view = new CarView("CarSim 1.0", cc);
+        cc.setView(view);
+        cc.initializeCarPosition();
         // Start the timer
         cc.timer.start();
+    }
+
+    public void initializeCarPosition() {
+        for (int i = 0; i < cars.size(); i++) {
+            int x = (int) cars.get(i).getX();
+            int y = (int) cars.get(i).getY();
+            frame.drawPanel.moveit(i, x, y);
+        }
+        frame.drawPanel.repaint();
     }
 
 
@@ -105,8 +164,21 @@ public class CarController<ACar extends LeCar> {
             }
         }
     }
-
-
-
-
+    void platform(double angle) {
+        for (ACar car: cars) {
+            if (car instanceof ITruck truck) {
+                truck.platform(angle);
+            }
+        }
+    }
+    void startEngine() {
+        for (ACar car: cars) {
+            car.startEngine();
+        }
+    }
+    void stopEngine() {
+        for (ACar car: cars) {
+            car.stopEngine();
+        }
+    }
 }

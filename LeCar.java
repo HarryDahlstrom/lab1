@@ -12,6 +12,7 @@ abstract class LeCar implements Movable, ILEcarWorkshop{
     private double currentXPosition;
     private double currentYPosition;
     protected String type;
+    private boolean engineOn;
 
     // Constructor below //
     protected LeCar(int nrDoors, Color color, double enginePower, String modelName, String type){
@@ -43,12 +44,24 @@ abstract class LeCar implements Movable, ILEcarWorkshop{
         color = clr;
     }
 
+    protected boolean getEngineStatus() {
+        return engineOn;
+    }
+
+    protected void setEngineStatus(boolean tof) {
+        this.engineOn = tof;
+    }
+
     protected void startEngine(){
-        currentSpeed = 0.1;
+        if (!getEngineStatus()) {
+            currentSpeed = 0.1;
+            setEngineStatus(true);
+        }
     }
 
     protected void stopEngine(){
         currentSpeed = 0;
+        setEngineStatus(false);
     }
 
     public double getX(){
@@ -79,13 +92,13 @@ abstract class LeCar implements Movable, ILEcarWorkshop{
     }
 
     protected void gas(double amount){
-        if (amount <= 1 && amount >= 0 ){
+        if (amount <= 1 && amount >= 0 && getEngineStatus()){
             incrementSpeed(amount);
         }
     }
 
     protected void brake(double amount){
-        if (amount <= 1 && amount >= 0 ){
+        if (amount <= 1 && amount >= 0){
             decrementSpeed(amount);
         }
     }
@@ -95,16 +108,16 @@ abstract class LeCar implements Movable, ILEcarWorkshop{
     public void move() {
         // 2 = North, 1 = West, 0 = South, -1 = East //
         if (direction == 1) { // West
-            currentXPosition += currentSpeed;
+            setX(getX() + getCurrentSpeed());
         }
         else if (direction == -1) { // East
-            currentXPosition = currentXPosition - currentSpeed;
+            setX(getX() - getCurrentSpeed());
         }
         else if (direction == 2) { // North
-            currentYPosition += currentSpeed;
+            setY(getY() + getCurrentSpeed());
         }
         else if (direction == 0) {// South
-            currentYPosition = currentYPosition - currentSpeed;
+            setY(getY() - getCurrentSpeed());
         }
     }
 

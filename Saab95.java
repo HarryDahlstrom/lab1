@@ -25,6 +25,6 @@ public class Saab95 extends LeCar implements ITurbo {
     protected double speedFactor(){ // unik
         double turbo = 1;
         if(turboOn) turbo = 130;
-        return enginePower * 0.01 * turbo;
+        return getEnginePower() * 0.01 * turbo;
     }
 }

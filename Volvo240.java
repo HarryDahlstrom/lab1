@@ -13,7 +13,7 @@ public class Volvo240 extends LeCar {
     // Functions unique to Volvo below //
     @Override
     protected double speedFactor(){
-        return enginePower * 0.01 * trimFactor;
+        return getEnginePower() * 0.01 * trimFactor;
     }
 }
 

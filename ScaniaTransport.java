@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ScaniaTransport<C extends LeCar> extends LeCar {
+public class ScaniaTransport<C extends LeCar> extends LeCar implements ITruck{
     List<C> carsOnTransport = new ArrayList<>();
     protected boolean rampOn; // False --> Ramp up, True --> Ramp Down
 
@@ -77,5 +77,8 @@ public class ScaniaTransport<C extends LeCar> extends LeCar {
         }
 
     }
-}
 
+    @Override
+    public void platform(double x) {
+    }
+}

@@ -34,11 +34,17 @@ public class DrawPanel extends JPanel{
         carPoints.get(index).y = y;
     }
 
+    private final int panelWidth;
+    private final int panelHeight;
+
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
+        this.panelWidth = x;
+        this.panelHeight = y;
+
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
+        this.setBackground(Color.cyan);
 
 
         // Print an error message in case file is not found with a try/catch block
@@ -66,8 +72,16 @@ public class DrawPanel extends JPanel{
         {
             ex.printStackTrace();
         }
-
     }
+
+    public int getPanelWidth() {
+        return panelWidth;
+    }
+
+    public int getPanelHeight() {
+        return panelHeight;
+    }
+
 
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.

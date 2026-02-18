@@ -84,7 +84,7 @@ public class CarView extends JFrame{
         controlPanel.add(lowerBedButton, 5);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
-        controlPanel.setBackground(Color.CYAN);
+        controlPanel.setBackground(Color.GREEN);
 
 
         startButton.setBackground(Color.blue);
@@ -106,7 +106,6 @@ public class CarView extends JFrame{
                 carC.gas(gasAmount);
             }
         });
-
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,6 +125,38 @@ public class CarView extends JFrame{
                 carC.turboOff();
             }
         });
+
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.platform(0.0);
+                liftBedButton.setBackground(Color.GREEN);
+                lowerBedButton.setBackground(Color.WHITE);
+            }
+        });
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.platform(50);
+                lowerBedButton.setBackground(Color.red);
+                liftBedButton.setBackground(Color.WHITE);
+            }
+        });
+
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.startEngine();
+            }
+        });
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.stopEngine();
+            }
+        });
+
+
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

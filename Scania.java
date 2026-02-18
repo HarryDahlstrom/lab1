@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania extends LeCar {
+public class Scania extends LeCar implements ITruck {
 
     protected double currentAngle; // 0 < angle < 70
 
@@ -11,25 +11,33 @@ public class Scania extends LeCar {
         stopEngine();
     }
 
-    // TODO Functions unique to Scania // - Moved to super
-    protected void platform(double angleIncrement) {
+    // TODO Functions unique to Scania //
+    @Override
+    public void platform(double angleIncrement) {
         if (currentSpeed == 0) {
             if ((currentAngle + angleIncrement) <= 70 && (currentAngle + angleIncrement) >= 0) {
-                currentAngle = (currentAngle + angleIncrement);
+                currentAngle = angleIncrement;
             }
         }
-
     }
 
     @Override
     protected void startEngine(){
-        if (currentAngle == 0) {
+        // Om vi kör så kommer inget hända.
+        if (currentAngle == 0.0 && !getEngineStatus()) {
             currentSpeed = 0.1;
+            setEngineStatus(true);
+            // För att starta motor medan stillastående utan att kunna gasa.
+        } else if (currentAngle > 0.0 && !getEngineStatus()) {
+            setEngineStatus(true);
         }
     }
 
     @Override
     protected double speedFactor() {
-        return enginePower * 0.01;
+        if (currentAngle == 0.0) {
+            return getEnginePower() * 0.01;
+        }
+        return 0;
     }
 }
