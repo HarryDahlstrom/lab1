@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
-
+import java.awt.*;
 /*
 * This class represents the Controller part in the MVC pattern.
 * Its responsibilities are to listen to the View and responds in an appropriate manner by
@@ -72,9 +72,10 @@ public class CarController<ACar extends LeCar> {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
 
-    public void setView(CarView frame){
+    public void setView(CarView frame) {
         this.frame = frame;
     }
+
     // A list of cars, modify if needed
     ArrayList<ACar> cars = new ArrayList<>();
 
@@ -93,8 +94,6 @@ public class CarController<ACar extends LeCar> {
         for (int i = 0; i < cc.cars.size(); i++) {
             cc.cars.get(i).setY(i * 100);
         }
-
-
 
 
         // Start a new view and send a reference of self
@@ -116,8 +115,8 @@ public class CarController<ACar extends LeCar> {
 
 
     /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
+     * view to update its images. Change this method to your needs.
+     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (int i = 0; i < cars.size(); i++) {
@@ -144,41 +143,64 @@ public class CarController<ACar extends LeCar> {
             car.gas(gas);
         }
     }
+
     void brake(int amount) {
         double brake = ((double) amount / 100);
         for (ACar car : cars) {
             car.brake((brake));
         }
     }
+
     void turboOn() {
-        for (ACar car: cars) {
+        for (ACar car : cars) {
             if (car instanceof ITurbo turboCar) {
                 turboCar.setTurboOn();
             }
         }
     }
+
     void turboOff() {
-        for (ACar car: cars) {
+        for (ACar car : cars) {
             if (car instanceof ITurbo turboCar) {
                 turboCar.setTurboOff();
             }
         }
     }
+
     void platform(double angle) {
-        for (ACar car: cars) {
+        for (ACar car : cars) {
             if (car instanceof ITruck truck) {
                 truck.platform(angle);
             }
         }
     }
+
     void startEngine() {
-        for (ACar car: cars) {
+        for (ACar car : cars) {
             car.startEngine();
         }
     }
+
     void stopEngine() {
-        for (ACar car: cars) {
+        for (ACar car : cars) {
             car.stopEngine();
         }
     }
+
+    void volvocol() {
+        Point workshop = frame.drawPanel.getWorkshop();
+        double workshopX = workshop.getX();
+        double workshopY = workshop.getY();
+        for (ACar car: cars) {
+            if (car instanceof Volvo240) {
+                if ((car.getX() <= workshopX + 20) && (car.getX() >= workshopX - 20)
+                    && (car.getY() <= workshopY + 20) && (car.getY() >= workshopY - 20));
+            }
+
+
+        }
+
+    }
+
+
 }
