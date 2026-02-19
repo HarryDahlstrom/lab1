@@ -1,0 +1,29 @@
+UML-diagram i pics folder.
+1. Ny design
+
+    Implementation I
+    Flytta ut move() till en ny klass Move
+
+    Implementation II
+    Skapa 2 nya subklasser, en för bil och en för lastbil.
+    Dit flyttas exempelvis startengine()
+
+2. Refaktoriseringsplan
+    Implementation I
+    1. Skapa ny subklass av LeCar vid namn Move
+    2. Flytta över respektive move() funktion till nya klassen
+    3. Koppla ihop alla andra subklasser som använder sig av dessa funktioner så att
+       pathingen sker rätt och de kan hämta data/funktioner.
+
+    Implementation II
+    1. Skapa nya subklasser vid namn Car och Truck
+    2. Flytta över startEngine() till de båda ny klasserna
+        2a. se till att startEngine() för Truck har paramatrerar för transportfordon
+            exempelvis i True eller False
+    3. (I teorin) skulle vi ha flera lastbilar med liknande lyft funktioner,
+       så kan vi flytta över de till Truck för att minska redundancy.
+    4. Sist är det bara att koppla allt rätt och ser till pathingen stämmer/fungerar
+
+3. Parallelt jobb?
+    Implementation I går att skötas av en programmerare, samtidigt som
+    implementation II kan utföras av två samtidigt

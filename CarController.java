@@ -193,7 +193,7 @@ public class CarController<ACar extends LeCar> {
             if ((car.getX() <= volvoWorkshopX + 20) && (car.getX() >= volvoWorkshopX - 20)
                     && (car.getY() <= volvoWorkshopY + 20) && (car.getY() >= volvoWorkshopY - 20)) {
                 if (workshopVolvo240.addCar(car)) { // Add into a specialized Volvo240 workshop.
-                    car.currentSpeed = 0.0;
+                    car.setCurrentSpeed(0.0);
                     car.setX(volvoWorkshopX + 10000); // + 10000 For collision check workaround.
                     car.setY(volvoWorkshopY);
                     car.stopEngine();

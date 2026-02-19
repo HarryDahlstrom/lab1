@@ -15,7 +15,7 @@ public class ScaniaTransport<C extends LeCar> extends LeCar implements ITruck{
     }
 
     protected void setRampOn() {
-        if (currentSpeed == 0) {
+        if (getCurrentSpeed() == 0.0) {
             rampOn = true;
         }
     }
@@ -57,20 +57,19 @@ public class ScaniaTransport<C extends LeCar> extends LeCar implements ITruck{
     @Override
     public void move() {
         if (direction == 1) {
-            setX(getX() + currentSpeed);
+            setX(getX() + getCurrentSpeed());
         } else if (direction == -1) {
-            setX(getX() - currentSpeed);
+            setX(getX() - getCurrentSpeed());
         } else if (direction == 2) {
-            setY(getY() + currentSpeed);
+            setY(getY() + getCurrentSpeed());
         } else if (direction == 0) {
-            setY(getY() - currentSpeed);
+            setY(getY() - getCurrentSpeed());
         }
 
         for (C car : carsOnTransport) {
             car.setX(this.getX());
             car.setY(this.getY());
         }
-
     }
 
     @Override

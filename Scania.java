@@ -14,7 +14,7 @@ public class Scania extends LeCar implements ITruck {
     // TODO Functions unique to Scania //
     @Override
     public void platform(double angleIncrement) {
-        if (currentSpeed == 0) {
+        if (getCurrentSpeed() == 0) {
             if ((currentAngle + angleIncrement) <= 70 && (currentAngle + angleIncrement) >= 0) {
                 currentAngle = angleIncrement;
             }
@@ -25,7 +25,7 @@ public class Scania extends LeCar implements ITruck {
     protected void startEngine(){
         // Om vi kör så kommer inget hända.
         if (currentAngle == 0.0 && !getEngineStatus()) {
-            currentSpeed = 0.1;
+            setCurrentSpeed(0.1);
             setEngineStatus(true);
             // För att starta motor medan stillastående utan att kunna gasa.
         } else if (currentAngle > 0.0 && !getEngineStatus()) {

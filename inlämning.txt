@@ -1,0 +1,39 @@
+Analysera era klasser med avseende på Separation of Concern (SoC) och Single Responsibility Principle (SRP).
+UML-diagram i pics folder.
+
+1. ansvarsområden
+    1. klass LeCar ansvarar för hur ett fordon defineras/skapas och ger möjlighet till fordonet att röra på sig.
+
+    2. klass Saab95 specificerar en Saab95 bil
+    3. klass Volvo240  specificerar en Volvo240 bil
+
+    4. klass Scania  specificerar en Scania lastbil
+    5. klass ScaniaTransport  specificerar en ScaniaTransport lastbil
+
+    6. klass Workshop ansvarar för hur en verkstad ska bete sig
+    7. klass WorkshopVolvo240 specificerar en "specialiserad" verkstad som endast tar emot Volvo240 bilar
+
+2. problem
+    klass 1, LeCar kan tydligt och enkelt representera många olika fordon, men den innehåller samtidigt information om
+    hur ett fordon "rör" på sig. D.v.s. klassen kan behöva ändras ifall definitionen av ett fordon ändras eller
+    "regler" kring körning och bryter därmed SRP.
+
+    klass 2, har ett tydligt syfte i och med att den definerar/skapar en Saab95 bil
+    klass 3, har ett tydligt syfte i och med att den definerar/skapar en Volvo240 bil
+
+    klass 4, har i sig ett tydligt syfte, men en ovveride av en funktion från LeCar sker. En lösning hade varit en
+    eventuell ny subklass till LeCar som definerar lastbilar
+    klass 5, samma som ovan.
+
+    klass 6, tydligt definerar en verkstad och har rimliga funktioner. OK.
+    klass 7, subklass till 6 och ser bra ut.
+
+3. förslag på förbättring
+
+    Just nu är programmet väldigt kompakt, inget negativt per se, men kan bli problem längre fram. Det vore inte
+    orimligt med att föreslå fler subklasser, exempelvis att låta LeCar bli ännu mer abstrakt. Just nu overrideas
+    funktioner då reglerna inte "stämmer" överens överallt, exempelvis lastbilar.
+
+    Likt som diskuterades under problem så vore det nog önskvärt att flytta Move delen i LeCar till en ny subklass,
+    detta för fortsatt implementering av fordon som kanske kommer med unika önskemål, men även för att upprätthålla
+    SRP.

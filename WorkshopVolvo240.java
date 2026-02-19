@@ -10,6 +10,4 @@ public class WorkshopVolvo240 extends Workshop {
         super(nrCars, "Volvo240", true);
 
     }
-
-
 }

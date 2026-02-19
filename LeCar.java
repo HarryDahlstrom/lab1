@@ -43,6 +43,10 @@ abstract class LeCar implements Movable, IWorkshop{
         return currentSpeed;
     }
 
+    protected void setCurrentSpeed(double value) {
+        currentSpeed = value;
+    }
+
     protected Color getColor(){
         return color;
     }
@@ -61,13 +65,13 @@ abstract class LeCar implements Movable, IWorkshop{
 
     protected void startEngine() {
         if (!getEngineStatus()) {
-            currentSpeed = 0.1;
+            setCurrentSpeed(0.1);
             setEngineStatus(true);
         }
     }
 
     protected void stopEngine() {
-        currentSpeed = 0;
+        setCurrentSpeed(0.0);
         setEngineStatus(false);
     }
 
@@ -91,11 +95,11 @@ abstract class LeCar implements Movable, IWorkshop{
     protected abstract double speedFactor();
 
     protected void incrementSpeed(double amount) {
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower());
+        setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower()));
     }
 
     protected void decrementSpeed(double amount) {
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+        setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount,0));
     }
 
     protected void gas(double amount) {
