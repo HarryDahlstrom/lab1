@@ -14,9 +14,6 @@ public class ScaniaTransport<C extends LeCar> extends LeCar implements ITruck{
         stopEngine();
     }
 
-
-    // TODO Functions unique to Scania //
-
     protected void setRampOn() {
         if (currentSpeed == 0) {
             rampOn = true;
@@ -29,7 +26,7 @@ public class ScaniaTransport<C extends LeCar> extends LeCar implements ITruck{
 
     protected void loadtransport(C car) {
         if (rampOn) {
-            if (Objects.equals(car.type, "Car")) {
+            if (Objects.equals(car.getType(), "Car")) {
                 if (this.getY() - car.getY() == 1 &&
                         this.getX() - car.getX() == 0) {
                     carsOnTransport.add(car);
@@ -39,7 +36,6 @@ public class ScaniaTransport<C extends LeCar> extends LeCar implements ITruck{
             }
         }
     }
-
 
     protected void unloadtransport() {
         if (rampOn) {
@@ -52,7 +48,6 @@ public class ScaniaTransport<C extends LeCar> extends LeCar implements ITruck{
             }
         }
     }
-
 
     @Override
     protected double speedFactor() {

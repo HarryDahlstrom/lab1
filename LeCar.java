@@ -1,21 +1,21 @@
 import java.awt.*;
 
-abstract class LeCar implements Movable, ILEcarWorkshop{
+abstract class LeCar implements Movable, IWorkshop{
 
-    // Global variables //
+    // Global variables // Almost all protected can be turned into private, test files need them to be protected to work
     protected int nrDoors;
     protected double enginePower;
     protected double currentSpeed;
-    protected Color color;
-    protected String modelName;
+    private Color color;
+    private String modelName;
     protected int direction;
     private double currentXPosition;
     private double currentYPosition;
-    protected String type;
+    private String type; // Fråga om final på labb?
     private boolean engineOn;
 
     // Constructor below //
-    protected LeCar(int nrDoors, Color color, double enginePower, String modelName, String type){
+    protected LeCar(int nrDoors, Color color, double enginePower, String modelName, String type) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
@@ -23,6 +23,13 @@ abstract class LeCar implements Movable, ILEcarWorkshop{
         this.type = type;
     }
 
+    public String getModelName() {
+        return modelName;
+    }
+
+    protected String getType() {
+        return type;
+    }
     // Functions for both vehicles //
     protected double getEnginePower(){
         return enginePower;
@@ -52,14 +59,14 @@ abstract class LeCar implements Movable, ILEcarWorkshop{
         this.engineOn = tof;
     }
 
-    protected void startEngine(){
+    protected void startEngine() {
         if (!getEngineStatus()) {
             currentSpeed = 0.1;
             setEngineStatus(true);
         }
     }
 
-    protected void stopEngine(){
+    protected void stopEngine() {
         currentSpeed = 0;
         setEngineStatus(false);
     }
@@ -83,22 +90,22 @@ abstract class LeCar implements Movable, ILEcarWorkshop{
 
     protected abstract double speedFactor();
 
-    protected void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+    protected void incrementSpeed(double amount) {
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower());
     }
 
-    protected void decrementSpeed(double amount){
+    protected void decrementSpeed(double amount) {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
-    protected void gas(double amount){
-        if (amount <= 1 && amount >= 0 && getEngineStatus()){
+    protected void gas(double amount) {
+        if (amount <= 1 && amount >= 0 && getEngineStatus()) {
             incrementSpeed(amount);
         }
     }
 
-    protected void brake(double amount){
-        if (amount <= 1 && amount >= 0){
+    protected void brake(double amount) {
+        if (amount <= 1 && amount >= 0) {
             decrementSpeed(amount);
         }
     }

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class DrawPanel extends JPanel{
 
+
+
 //    // Just a single image, TODO: Generalize
 //    BufferedImage volvoImage;
 //    // To keep track of a single car's position
@@ -25,7 +27,7 @@ public class DrawPanel extends JPanel{
 //    Point scaniaPoint = new Point();
 
     BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,300);
+    Point volvoWorkshopPoint = new Point(0,300);
 
 
     // TODO: Make this general for all cars
@@ -97,5 +99,9 @@ public class DrawPanel extends JPanel{
         //g.drawImage(saabImage, saabPoint.x, saabPoint.y, null);
         //g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null);
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+    }
+
+    public Point getVolvoWorkshop() {
+        return volvoWorkshopPoint;
     }
 }

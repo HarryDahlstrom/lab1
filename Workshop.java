@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Workshop<C extends ILEcarWorkshop> {
+public class Workshop<C extends IWorkshop> {
 
 
     // Global variables //
@@ -22,31 +22,35 @@ public class Workshop<C extends ILEcarWorkshop> {
     }
 
     // functions //
-    protected void addCar(C clientCar){
-
+    protected boolean addCar(C clientCar) {
         if (specializedWorkshop == true) {
-            if (clientCar.modelName.equals(carModel) && emptySpots != nrCars){
+            if (clientCar.getModelName().equals(carModel) && emptySpots != nrCars){
                 emptySpots += 1;
                 carsInWorkshop.add(clientCar);
-            }
-            else {
+                System.out.println("Car was added into workshop");
+                return true;
+            } else if (emptySpots == nrCars){
+                System.out.println("Workshop is currently full");
+                return false;
+            } else {
                 System.out.println("Car not supported at this workshop");
+                return false;
             }
         } else {
             if (emptySpots != nrCars){
                 emptySpots += 1;
                 carsInWorkshop.add(clientCar);
+                return true;
             } else {
                 System.out.println("Workshop is currently full");
+                return false;
             }
         }
     }
 
     protected void carHandOut(C clientCar){
-
         if (carsInWorkshop.contains(clientCar)) {
             carsInWorkshop.remove(carsInWorkshop.indexOf(clientCar));
         }
-
     }
 }

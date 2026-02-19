@@ -6,8 +6,8 @@ public class WorkshopVolvo240 extends Workshop {
 
 
     // Constructor below //
-    protected WorkshopVolvo240(){
-        super(10, "Volvo240", true);
+    protected WorkshopVolvo240(int nrCars){
+        super(nrCars, "Volvo240", true);
 
     }
 
