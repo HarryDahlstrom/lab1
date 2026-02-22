@@ -1,3 +1,3 @@
 public interface IWorkshop {
-    public String getModelName();
+    String getModelName();
 }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Workshop<C extends IWorkshop> {
+abstract class Workshop<C extends IWorkshop> {
 
 
     // Global variables //
