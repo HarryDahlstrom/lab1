@@ -26,7 +26,7 @@ UML-diagram i pics folder.
     Implementation II
     1. Skapa nya subklasser vid namn Car och Truck
     2. Flytta över startEngine() till de båda ny klasserna
-        2a. se till att startEngine() för Truck har paramatrerar för transportfordon
+        2a. Se till att startEngine() för Truck har paramatrerar för transportfordon
             exempelvis i True eller False
     3. (I teorin) skulle vi ha flera lastbilar med liknande lyft funktioner,
        så kan vi flytta över de till Truck för att minska redundancy.
@@ -34,7 +34,7 @@ UML-diagram i pics folder.
 
     Implementation III
     1. Dela upp carView i en subklass för knapparnas position
-    2. skapa subklasser under ovan med respektive knapp som ska synas på UI:t
+    2. Skapa subklasser under ovan med respektive knapp som ska synas på UI:t
     3. Ser till att det är en väg till carController från carView och inte åt andra hållet
     4. Ser till att carView behåller sitt beroende till drawPanel men att carController inte gör det.
 

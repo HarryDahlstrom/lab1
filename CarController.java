@@ -10,7 +10,7 @@ import java.awt.*;
  * modifying the model state and the updating the view.
  */
 
-public class CarController<ACar extends LeCar> {
+public class CarController<ACar extends LeVehicle> {
     // member fields:
 
     private static DrawPanel panel;

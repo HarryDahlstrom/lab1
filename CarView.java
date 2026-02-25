@@ -4,6 +4,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -21,14 +22,12 @@ public class CarView extends JFrame{
     CarController carC;
 
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    private Buttons controlPanel;
+    private JSpinner gasSpinner;
 
-    JPanel controlPanel = new JPanel();
-
-    JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
-    JLabel gasLabel = new JLabel("Amount of gas");
-
+    private int gasAmount = 0;
+    private JLabel gasLabel = new JLabel("Amount of gas");
+    /*
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
     JButton turboOnButton = new JButton("Saab Turbo on");
@@ -38,10 +37,10 @@ public class CarView extends JFrame{
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
+    */
 
     // Constructor
-    public CarView(String framename, CarController cc){
-        this.carC = cc;
+    public CarView(String framename){
         initComponents(framename);
     }
 
@@ -52,7 +51,6 @@ public class CarView extends JFrame{
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
         this.add(drawPanel);
 
 
@@ -62,31 +60,33 @@ public class CarView extends JFrame{
                         100, //max
                         1);//step
         gasSpinner = new JSpinner(spinnerModel);
+
         gasSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
         });
+        JPanel gasPanel = new JPanel();
 
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
-
         this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2,4));
+        controlPanel = new Buttons();
 
-        controlPanel.add(gasButton, 0);
-        controlPanel.add(turboOnButton, 1);
+        controlPanel.add(controlPanel);
+        /* controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(lowerBedButton, 5); */
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
+
         this.add(controlPanel);
         controlPanel.setBackground(Color.GREEN);
 
-
+        /*
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
         startButton.setPreferredSize(new Dimension(X/5-15,200));
@@ -97,10 +97,10 @@ public class CarView extends JFrame{
         stopButton.setForeground(Color.black);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
-
+        */
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
-        gasButton.addActionListener(new ActionListener() {
+        /*gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.gas(gasAmount);
@@ -156,6 +156,8 @@ public class CarView extends JFrame{
             }
         });
 
+        */
+
 
 
         // Make the frame pack all it's components by respecting the sizes if possible.
@@ -170,4 +172,15 @@ public class CarView extends JFrame{
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+    public Map<ButtonType, JButton> getAllButtons() {
+        return controlPanel.getAllButtons();
+    }
+
+    public int getGasAmount() {
+        return (int) gasSpinner.getValue();
+    }
+
+
+
 }
