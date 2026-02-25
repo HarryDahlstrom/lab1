@@ -8,7 +8,15 @@ UML-diagram i pics folder.
     Skapa 2 nya subklasser, en för bil och en för lastbil.
     Dit flyttas exempelvis startengine()
 
+    Implementation III
+    Dela upp carView till en knappPositions subklass med knapp subklassar, alternativt använder vi bridge pathing med
+    interface för att koppla samman allt.
+    Ser till att carView blir beroende av carController och inte tvärtom, ser även till att carController inte är
+    beroende av drawPanel, men att carView fortsatt har ett beroende till drawPanel
+
+
 2. Refaktoriseringsplan
+
     Implementation I
     1. Skapa ny subklass av LeCar vid namn Move
     2. Flytta över respektive move() funktion till nya klassen
@@ -24,6 +32,13 @@ UML-diagram i pics folder.
        så kan vi flytta över de till Truck för att minska redundancy.
     4. Sist är det bara att koppla allt rätt och ser till pathingen stämmer/fungerar
 
+    Implementation III
+    1. Dela upp carView i en subklass för knapparnas position
+    2. skapa subklasser under ovan med respektive knapp som ska synas på UI:t
+    3. Ser till att det är en väg till carController från carView och inte åt andra hållet
+    4. Ser till att carView behåller sitt beroende till drawPanel men att carController inte gör det.
+
 3. Parallelt jobb?
     Implementation I går att skötas av en programmerare, samtidigt som
-    implementation II kan utföras av två samtidigt
+    Implementation II kan utföras av två samtidigt
+    Implementation III går att jobba på ensam
