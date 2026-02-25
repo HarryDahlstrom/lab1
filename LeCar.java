@@ -1,67 +1,24 @@
 import java.awt.*;
 
-abstract class LeCar implements Movable, IWorkshop{
+abstract class LeCar extends Move {
 
-    // Global variables // Almost all protected can be turned into private, test files need them to be protected to work
     protected int nrDoors;
+    protected Color color;
     protected double enginePower;
-    protected double currentSpeed;
-    private Color color;
-    private String modelName;
-    protected int direction;
-    private double currentXPosition;
-    private double currentYPosition;
-    private String type; // Fråga om final på labb?
-    private boolean engineOn;
+    protected String modelName;
+    protected String type;
 
-    // Constructor below //
+
+
     protected LeCar(int nrDoors, Color color, double enginePower, String modelName, String type) {
         this.nrDoors = nrDoors;
-        this.color = color;
+        this.color  = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
         this.type = type;
     }
 
-    public String getModelName() {
-        return modelName;
-    }
 
-    protected String getType() {
-        return type;
-    }
-    // Functions for both vehicles //
-    protected double getEnginePower(){
-        return enginePower;
-    }
-
-    protected int getNrDoors(){
-        return nrDoors;
-    }
-
-    protected double getCurrentSpeed(){
-        return currentSpeed;
-    }
-
-    protected void setCurrentSpeed(double value) {
-        currentSpeed = value;
-    }
-
-    protected Color getColor(){
-        return color;
-    }
-
-    protected void setColor(Color clr){
-        color = clr;
-    }
-
-    protected boolean getEngineStatus() {
-        return engineOn;
-    }
-
-    protected void setEngineStatus(boolean tof) {
-        this.engineOn = tof;
-    }
 
     protected void startEngine() {
         if (!getEngineStatus()) {
@@ -70,81 +27,5 @@ abstract class LeCar implements Movable, IWorkshop{
         }
     }
 
-    protected void stopEngine() {
-        setCurrentSpeed(0.0);
-        setEngineStatus(false);
-    }
 
-    public double getX(){
-        return this.currentXPosition;
-    }
-
-    public double getY(){
-        return this.currentYPosition;
-    }
-
-    public void setX(double x){
-        this.currentXPosition = x;
-    }
-
-    public void setY(double y){
-        this.currentYPosition = y;
-    }
-
-
-    protected abstract double speedFactor();
-
-    protected void incrementSpeed(double amount) {
-        setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower()));
-    }
-
-    protected void decrementSpeed(double amount) {
-        setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount,0));
-    }
-
-    protected void gas(double amount) {
-        if (amount <= 1 && amount >= 0 && getEngineStatus()) {
-            incrementSpeed(amount);
-        }
-    }
-
-    protected void brake(double amount) {
-        if (amount <= 1 && amount >= 0) {
-            decrementSpeed(amount);
-        }
-    }
-
-    // Move functions below //
-    @Override
-    public void move() {
-        // 2 = North, 1 = West, 0 = South, -1 = East //
-        if (direction == 1) { // West
-            setX(getX() + getCurrentSpeed());
-        }
-        else if (direction == -1) { // East
-            setX(getX() - getCurrentSpeed());
-        }
-        else if (direction == 2) { // North
-            setY(getY() + getCurrentSpeed());
-        }
-        else if (direction == 0) {// South
-            setY(getY() - getCurrentSpeed());
-        }
-    }
-
-    @Override
-    public void turnLeft() {
-        direction -= 1;
-        if (direction < -1) {
-            direction = 2;
-        }
-    }
-
-    @Override
-    public void turnRight() {
-        direction += 1;
-        if (direction > 2) {
-            direction = -1;
-        }
-    }
 }

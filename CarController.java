@@ -79,7 +79,7 @@ public class CarController<ACar extends LeVehicle> {
     public static void main(String[] args) {
         WorkshopVolvo240 workshopVolvo240 = new WorkshopVolvo240(5);
         // Instance of this class
-        CarController<LeCar> cc = new CarController<>(panel, workshopVolvo240);
+        CarController<LeVehicle> cc = new CarController<>(panel, workshopVolvo240);
 
 
         //
