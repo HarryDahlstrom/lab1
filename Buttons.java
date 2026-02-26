@@ -8,7 +8,7 @@ public class Buttons extends JPanel{
 
     public Buttons() {
         this.setLayout(new GridLayout(2,4));
-        this.setBackground(Color.GREEN);
+        this.setBackground(Color.CYAN);
         this.setPreferredSize(new Dimension(400, 200));
 
         // Buttons
