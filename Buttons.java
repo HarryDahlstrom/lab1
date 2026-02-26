@@ -13,6 +13,12 @@ public class Buttons extends JPanel{
 
         // Buttons
         buttons.put(ButtonType.GAS, new GasButton());
+        buttons.put(ButtonType.BRAKE, new BrakeButton());
+        buttons.put(ButtonType.TURBOON, new TurboOnButton());
+        buttons.put(ButtonType.TURBOOFF, new TurboOffButton());
+        buttons.put(ButtonType.PLATFORM, new PlatformButton());
+        buttons.put(ButtonType.START, new StartButton());
+        buttons.put(ButtonType.STOP, new StartButton());
 
         // Creates le buttoons
         for (JButton button : buttons.values()) {

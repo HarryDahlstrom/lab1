@@ -1,3 +1,3 @@
 public enum ButtonType {
-    GAS, BRAKE, PLATFORM, START, STOP
+    GAS, BRAKE, PLATFORM, TURBOON, TURBOOFF, START, STOP
 }

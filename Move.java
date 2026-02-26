@@ -1,4 +1,12 @@
-abstract class Move extends LeVehicle {
+import java.awt.*;
+
+abstract class Move extends LeVehicle implements Movable {
+
+    // Constructor below //
+    public Move(int nrDoors, Color color, double enginePower, String modelName, String type) {
+        super(nrDoors, color, enginePower, modelName, type);
+    }
+
 
     // Move functions below //
     @Override

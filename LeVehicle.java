@@ -1,6 +1,6 @@
 import java.awt.*;
 
-abstract class LeVehicle implements Movable, IWorkshop{
+abstract class LeVehicle implements IWorkshop{
 
     // Global variables // Almost all protected can be turned into private, test files need them to be protected to work
     protected int nrDoors;
@@ -63,30 +63,40 @@ abstract class LeVehicle implements Movable, IWorkshop{
         this.engineOn = tof;
     }
 
+    // Starts Engine. Gets overridden in cases where the engine cant start at certain cases.
+    // Classes with @Override: LeTruck
+    protected void startEngine() {
+        if (!getEngineStatus()) {
+            setCurrentSpeed(0.1);
+            setEngineStatus(true);
+        }
+    }
 
     protected void stopEngine() {
         setCurrentSpeed(0.0);
         setEngineStatus(false);
     }
 
-    public double getX(){
+    protected double getX(){
         return this.currentXPosition;
     }
 
-    public double getY(){
+    protected double getY(){
         return this.currentYPosition;
     }
 
-    public void setX(double x){
+    protected void setX(double x) {
         this.currentXPosition = x;
     }
 
-    public void setY(double y){
+    protected void setY(double y){
         this.currentYPosition = y;
     }
 
 
-    protected abstract double speedFactor();
+    protected double speedFactor() {
+        return 0;
+    }
 
     protected void incrementSpeed(double amount) {
         setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower()));
@@ -108,37 +118,4 @@ abstract class LeVehicle implements Movable, IWorkshop{
         }
     }
 
-/*    // Move functions below //
-    @Override
-    public void move() {
-        // 2 = North, 1 = West, 0 = South, -1 = East //
-        if (direction == 1) { // West
-            setX(getX() + getCurrentSpeed());
-        }
-        else if (direction == -1) { // East
-            setX(getX() - getCurrentSpeed());
-        }
-        else if (direction == 2) { // North
-            setY(getY() + getCurrentSpeed());
-        }
-        else if (direction == 0) {// South
-            setY(getY() - getCurrentSpeed());
-        }
-    }
-
-    @Override
-    public void turnLeft() {
-        direction -= 1;
-        if (direction < -1) {
-            direction = 2;
-        }
-    }
-
-    @Override
-    public void turnRight() {
-        direction += 1;
-        if (direction > 2) {
-            direction = -1;
-        }
-    }*/
 }

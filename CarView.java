@@ -185,6 +185,10 @@ public class CarView extends JFrame{
         return (int) gasSpinner.getValue();
     }
 
+    public double getAngleAmount() {
+        return getAngleAmount();
+    }
+
     public void repaintDrawPanel() {
         drawPanel.repaint();
     }

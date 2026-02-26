@@ -10,17 +10,23 @@ import java.awt.*;
  * modifying the model state and the updating the view.
  */
 
-public class CarController<ACar extends LeVehicle> {
+public class CarController<ACar extends Move> {
+
     // member fields:
-
     private WorkshopVolvo240 workshopVolvo240;
-
 
     public CarController(WorkshopVolvo240 workshopVolvo240) {
         this.workshopVolvo240 = workshopVolvo240;
     }
+    private final int delay = 50; // The delay (ms) corresponds to 20 updates a sec (hz)
+    private Timer timer = new Timer(delay, new TimerListener()); // timer with listener
+    CarView frame; // The frame that represents this instance View of the MVC pattern
 
-    // Tror vi ska flytta detta då det bedömt bryter mot MVC?
+
+    ArrayList<ACar> cars = new ArrayList<>(); // A list of cars, modify if needed
+
+
+    // TODO tror vi ska flytta detta då det bedömt bryter mot MVC?
     private void Collision() {
         int planeWidth = frame.getPanelWidth();
         int planeHeight = frame.getPanelHeight();
@@ -57,31 +63,17 @@ public class CarController<ACar extends LeVehicle> {
         }
     }
 
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with a listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
-
-    // The frame that represents this instance View of the MVC pattern
-    CarView frame;
-
+    // Functions below //
     public void setView(CarView frame) {
         this.frame = frame;
     }
 
-    // A list of cars, modify if needed
-    ArrayList<ACar> cars = new ArrayList<>();
-
-    //methods:
-
     public static void main(String[] args) {
         WorkshopVolvo240 workshopVolvo240 = new WorkshopVolvo240(5);
         // Instance of this class
-        CarController<LeVehicle> cc = new CarController<>(workshopVolvo240);
+        CarController<Move> cc = new CarController<>(workshopVolvo240);
 
 
-        //
         cc.cars.add(new Volvo240());
         cc.cars.add(new Saab95());
         cc.cars.add(new Scania());
@@ -89,7 +81,6 @@ public class CarController<ACar extends LeVehicle> {
         for (int i = 0; i < cc.cars.size(); i++) {
             cc.cars.get(i).setY(i * 100);
         }
-
 
         // Start a new view and send a reference of self
         CarView view = new CarView("CarSim 1.0");
@@ -119,7 +110,6 @@ public class CarController<ACar extends LeVehicle> {
                 ACar car = cars.get(i);
 
                 car.move();
-
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
 
@@ -135,6 +125,12 @@ public class CarController<ACar extends LeVehicle> {
 
     public void ButtonListerers() {
         frame.getAllButtons().get(ButtonType.GAS).addActionListener(e -> gas(frame.getGasAmount()));
+        frame.getAllButtons().get(ButtonType.BRAKE).addActionListener(e -> brake(frame.getGasAmount()));
+        frame.getAllButtons().get(ButtonType.TURBOON).addActionListener(e -> turboOn());
+        frame.getAllButtons().get(ButtonType.TURBOOFF).addActionListener(e -> turboOff());
+        frame.getAllButtons().get(ButtonType.PLATFORM).addActionListener(e -> platform(frame.getAngleAmount()));
+        frame.getAllButtons().get(ButtonType.START).addActionListener(e -> startEngine());
+        frame.getAllButtons().get(ButtonType.STOP).addActionListener(e -> stopEngine());
     }
 
     // Calls the gas method for each vehicle once
@@ -175,12 +171,15 @@ public class CarController<ACar extends LeVehicle> {
             }
         }
     }
-    // Calls start engine method for all vehicles.
-    /*void startEngine() {
+
+    // TODO make startEngine work for each car
+    void startEngine() {
         for (ACar car : cars) {
             car.startEngine();
         }
-    }*/
+    }
+
+
     // Calls stop engine method for all vehicles.
     void stopEngine() {
         for (ACar car : cars) {

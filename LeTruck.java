@@ -1,25 +1,19 @@
 import java.awt.*;
 
-abstract class LeTruck extends Move {
+abstract class LeTruck extends Move implements StartEngine{
 
+    // Local variables //
     protected double currentAngle = 0;
-    protected int nrDoors;
-    protected Color color;
-    protected double enginePower;
-    protected String modelName;
-    protected String type;
     protected boolean bedUp;
 
-
-    protected LeTruck(int nrDoors, Color color, double enginePower, String modelName, String type) {
-        this.nrDoors = nrDoors;
-        this.color  = color;
-        this.enginePower = enginePower;
-        this.modelName = modelName;
-        this.type = type;
+    // Constructor below //
+    public LeTruck(int nrDoors, Color color, double enginePower, String modelName, String type) {
+        super(nrDoors, color, enginePower, modelName, type);
     }
 
-    protected void startEngine(){
+    // Functions for LeTruck below //
+    @Override
+    public void startEngine(){
         // Om vi kör så kommer inget hända.
         if (bedUp) {
             startEngine();
