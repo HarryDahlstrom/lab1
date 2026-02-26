@@ -18,7 +18,7 @@ public class Buttons extends JPanel{
         buttons.put(ButtonType.TURBOOFF, new TurboOffButton());
         buttons.put(ButtonType.PLATFORM, new PlatformButton());
         buttons.put(ButtonType.START, new StartButton());
-        buttons.put(ButtonType.STOP, new StartButton());
+        buttons.put(ButtonType.STOP, new StopButton());
 
         // Creates le buttoons
         for (JButton button : buttons.values()) {
