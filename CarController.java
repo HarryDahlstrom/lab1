@@ -13,18 +13,17 @@ import java.awt.*;
 public class CarController<ACar extends LeVehicle> {
     // member fields:
 
-    private static DrawPanel panel;
     private WorkshopVolvo240 workshopVolvo240;
 
 
-    public CarController(DrawPanel panel, WorkshopVolvo240 workshopVolvo240) {
-        this.panel = panel;
+    public CarController(WorkshopVolvo240 workshopVolvo240) {
         this.workshopVolvo240 = workshopVolvo240;
     }
 
+    // Tror vi ska flytta detta då det bedömt bryter mot MVC?
     private void Collision() {
-        int planeWidth = frame.drawPanel.getPanelWidth();
-        int planeHeight = frame.drawPanel.getPanelHeight();
+        int planeWidth = frame.getPanelWidth();
+        int planeHeight = frame.getPanelHeight();
 
         for (int i = 0; i < cars.size(); i++) {
             ACar car = cars.get(i);
@@ -79,7 +78,7 @@ public class CarController<ACar extends LeVehicle> {
     public static void main(String[] args) {
         WorkshopVolvo240 workshopVolvo240 = new WorkshopVolvo240(5);
         // Instance of this class
-        CarController<LeVehicle> cc = new CarController<>(panel, workshopVolvo240);
+        CarController<LeVehicle> cc = new CarController<>(workshopVolvo240);
 
 
         //
@@ -93,8 +92,9 @@ public class CarController<ACar extends LeVehicle> {
 
 
         // Start a new view and send a reference of self
-        CarView view = new CarView("CarSim 1.0", cc);
+        CarView view = new CarView("CarSim 1.0");
         cc.setView(view);
+        cc.ButtonListerers();
         cc.initializeCarPosition();
         // Start the timer
         cc.timer.start();
@@ -104,9 +104,9 @@ public class CarController<ACar extends LeVehicle> {
         for (int i = 0; i < cars.size(); i++) {
             int x = (int) cars.get(i).getX();
             int y = (int) cars.get(i).getY();
-            frame.drawPanel.moveit(i, x, y);
+            frame.updateCarPosition(i, x, y);
         }
-        frame.drawPanel.repaint();
+        frame.repaint();
     }
 
 
@@ -123,14 +123,18 @@ public class CarController<ACar extends LeVehicle> {
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
 
-                frame.drawPanel.moveit(i, x, y);
+                frame.updateCarPosition(i, x, y);
                 // repaint() calls the paintComponent method of the panel
 
             }
-            frame.drawPanel.repaint();
+            frame.repaintDrawPanel();
             Collision();
             volvocol();
         }
+    }
+
+    public void ButtonListerers() {
+        frame.getAllButtons().get(ButtonType.GAS).addActionListener(e -> gas(frame.getGasAmount()));
     }
 
     // Calls the gas method for each vehicle once
@@ -172,11 +176,11 @@ public class CarController<ACar extends LeVehicle> {
         }
     }
     // Calls start engine method for all vehicles.
-    void startEngine() {
+    /*void startEngine() {
         for (ACar car : cars) {
             car.startEngine();
         }
-    }
+    }*/
     // Calls stop engine method for all vehicles.
     void stopEngine() {
         for (ACar car : cars) {
@@ -185,7 +189,7 @@ public class CarController<ACar extends LeVehicle> {
     }
     // Specialised collision check for
     void volvocol() {
-        Point volvoWorkshop = frame.drawPanel.getVolvoWorkshop();
+        Point volvoWorkshop = frame.getVolvoWorkshop();
         double volvoWorkshopX = volvoWorkshop.getX();
         double volvoWorkshopY = volvoWorkshop.getY();
 

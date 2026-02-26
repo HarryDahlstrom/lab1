@@ -19,9 +19,9 @@ public class CarView extends JFrame{
     private static final int Y = 800;
 
     // The controller member
-    CarController carC;
+    // CarController carC;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    public DrawPanel drawPanel = new DrawPanel(X, Y-240); // Kan göras privat med nuvarande lösning, images funkar inte dock fuuuuuu
     private Buttons controlPanel;
     private JSpinner gasSpinner;
 
@@ -75,7 +75,7 @@ public class CarView extends JFrame{
 
         controlPanel = new Buttons();
 
-        controlPanel.add(controlPanel);
+        // controlPanel.add(controlPanel);
         /* controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
         controlPanel.add(brakeButton, 3);
@@ -177,10 +177,27 @@ public class CarView extends JFrame{
         return controlPanel.getAllButtons();
     }
 
+    public void updateCarPosition(int index, int x, int y) {
+        drawPanel.moveit(index, x, y);
+    }
+
     public int getGasAmount() {
         return (int) gasSpinner.getValue();
     }
 
+    public void repaintDrawPanel() {
+        drawPanel.repaint();
+    }
 
+    public int getPanelWidth() {
+        return drawPanel.getPanelWidth();
+    }
+    public int getPanelHeight() {
+        return drawPanel.getPanelHeight();
+    }
+
+    public Point getVolvoWorkshop() {
+        return drawPanel.getVolvoWorkshop();
+    }
 
 }
