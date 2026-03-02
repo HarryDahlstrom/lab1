@@ -128,7 +128,11 @@ public class CarController<ACar extends Move> {
         frame.getAllButtons().get(ButtonType.BRAKE).addActionListener(e -> brake(frame.getGasAmount()));
         frame.getAllButtons().get(ButtonType.TURBOON).addActionListener(e -> turboOn());
         frame.getAllButtons().get(ButtonType.TURBOOFF).addActionListener(e -> turboOff());
-        frame.getAllButtons().get(ButtonType.PLATFORM).addActionListener(e -> platform(frame.getAngleAmount()));
+        frame.getAllButtons().get(ButtonType.PLATFORMUP).addActionListener(e -> platform(frame.getAngleAmount()));
+        System.out.println(frame.getAngleAmount());
+
+        frame.getAllButtons().get(ButtonType.PLATFORMUP).addActionListener(e -> platform(frame.getAngleAmount()));
+        System.out.println(frame.getAngleAmount());
         frame.getAllButtons().get(ButtonType.START).addActionListener(e -> startEngine());
         frame.getAllButtons().get(ButtonType.STOP).addActionListener(e -> stopEngine());
     }
@@ -172,13 +176,11 @@ public class CarController<ACar extends Move> {
         }
     }
 
-    // TODO make startEngine work for each car
     void startEngine() {
         for (ACar car : cars) {
             car.startEngine();
         }
     }
-
 
     // Calls stop engine method for all vehicles.
     void stopEngine() {

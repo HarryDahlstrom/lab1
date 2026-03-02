@@ -1,8 +1,22 @@
+Model-View-Controller
+Smartare, dummare, tunnare
+
+1. Vilka avvikelser från MVC-idealet kan ni identifiera i det ursprungliga användargränssnittet?
+Vad borde ha gjorts smartare, dummare eller tunnare?
+
+    m. CarController
+            Är modellen pga att det finns beräkningsmetoder i denna class.
+            Main funktionen bör dock ej vara här och bör istället implementeras i en seperat application.
 
 
 
+    v. DrawPanel CarView
+            Drawpanel/CarView agerar modellen enligt MVC.
 
+    c. CarController
+            CarController agerar modellen enligt modellen.
+            Main funktionen i CarController ska inte finnas där och börjar vara i en application.
 
+2. Vilka av dessa brister åtgärdade ni med er nya design från del 3? Hur då? Vilka brister åtgärdade ni inte?
 
-
-
+3. Rita ett nytt UML-diagram som beskriver en förbättrad design med avseende på MVC.
