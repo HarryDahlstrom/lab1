@@ -158,6 +158,7 @@ public class CarView extends JFrame{
 
         */
 
+
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
@@ -181,10 +182,6 @@ public class CarView extends JFrame{
 
     public int getGasAmount() {
         return (int) gasSpinner.getValue();
-    }
-
-    public double getAngleAmount() {
-        return getAngleAmount();
     }
 
     public void repaintDrawPanel() {
