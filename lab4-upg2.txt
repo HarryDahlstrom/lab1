@@ -4,19 +4,34 @@ Smartare, dummare, tunnare
 1. Vilka avvikelser från MVC-idealet kan ni identifiera i det ursprungliga användargränssnittet?
 Vad borde ha gjorts smartare, dummare eller tunnare?
 
-    m. CarController
-            Är modellen pga att det finns beräkningsmetoder i denna class.
-            Main funktionen bör dock ej vara här och bör istället implementeras i en seperat application.
+    I. Model. - LeVehicle och dess subklasser + Workshop
 
+        Det är här det mekaniska kring vårt program sker, med andra ord programmets "hjärta".
+        Detta är vårt programs model enligt MVC.
 
+    II. View. - DrawPanel och CarView
+        Drawpanel/CarView agerar som vårt programs view, då det är här koden som visualiserar programmet
+        åt användaren sker.
 
-    v. DrawPanel CarView
-            Drawpanel/CarView agerar modellen enligt MVC.
+        Inge "icke" view funktioner sker i dessa klasser och den uppfyller sitt syfte
 
-    c. CarController
-            CarController agerar modellen enligt modellen.
-            Main funktionen i CarController ska inte finnas där och börjar vara i en application.
+    III. Controller. - CarController
+        Det är i CarController all input från användaren tas in och denna interagerar sedan medan
+        programmets model.
+        CarController extenda aldrig något initialt och hade därmed ingen koppling till resterande av vårt
+        program
 
 2. Vilka av dessa brister åtgärdade ni med er nya design från del 3? Hur då? Vilka brister åtgärdade ni inte?
 
+    CarController blev kopplat till vår model och fungerar nu.
+
+    Utöver ovan så åtgärdade vi kod enligt programmeringsprinciper och inte enligt MVC. Vi upplever inte att vi ser några
+    tydliga brister enligt MVC principen i nuläget, men vi kan ha fel.
+
 3. Rita ett nytt UML-diagram som beskriver en förbättrad design med avseende på MVC.
+
+    I DrawPanel under funktionen moveit så tar vi input index som direkt skapar en "osynlig" sammankoppling
+    till CarController och detta bryter MVC.
+
+    Drawpanel få in en lista och inte repetition av kod, pga indexet.
+    Collision flyttas från Controller 

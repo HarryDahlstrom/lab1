@@ -10,29 +10,36 @@ import java.awt.*;
  * modifying the model state and the updating the view.
  */
 
-public class CarController<ACar extends Move> {
+public class CarController {
 
     // member fields:
-    private WorkshopVolvo240 workshopVolvo240;
+    private LeModel model;
+    private CarView frame; // The frame that represents this instance View of the MVC pattern
+    // private WorkshopVolvo240 workshopVolvo240;
+    // private final int delay = 50; // The delay (ms) corresponds to 20 updates a sec (hz)
+    private Timer timer; //= new Timer(delay, new TimerListener()); // timer with listener
 
-    public CarController(WorkshopVolvo240 workshopVolvo240) {
-        this.workshopVolvo240 = workshopVolvo240;
+    public CarController(LeModel model, CarView frame /*WorkshopVolvo240 workshopVolvo240*/) {
+        // this.workshopVolvo240 = workshopVolvo240;
+        this.model = model;
+        this.frame = frame;
+
+        ButtonListerers();
+
+        timer = new Timer(50, new TimerListener());
     }
-    private final int delay = 50; // The delay (ms) corresponds to 20 updates a sec (hz)
-    private Timer timer = new Timer(delay, new TimerListener()); // timer with listener
-    CarView frame; // The frame that represents this instance View of the MVC pattern
 
 
-    ArrayList<ACar> cars = new ArrayList<>(); // A list of cars, modify if needed
+    // ArrayList<Move> model.getCars() = new ArrayList<>(); // A list of model.getCars(), modify if needed
 
 
     // TODO tror vi ska flytta detta då det bedömt bryter mot MVC?
-    private void Collision() {
+    /*private void Collision() {
         int planeWidth = frame.getPanelWidth();
         int planeHeight = frame.getPanelHeight();
 
-        for (int i = 0; i < cars.size(); i++) {
-            ACar car = cars.get(i);
+        for (int i = 0; i < model.getCars().size(); i++) {
+            Move car = model.getCars().get(i);
 
             int carWidth = frame.drawPanel.images.get(i).getWidth();
             int carHeight = frame.drawPanel.images.get(i).getHeight();
@@ -44,7 +51,7 @@ public class CarController<ACar extends Move> {
                 car.setX(0);
                 collided = true;
             } else if ((car.getX() > planeWidth - carWidth) && (car.getX() < 10000)) {
-                // car.getX() < 10000 since 10000 is location for cars loaded in workshop.
+                // car.getX() < 10000 since 10000 is location for model.getCars() loaded in workshop.
                 car.setX(planeWidth - carWidth);
                 collided = true;
             } else if (car.getY() < 0) {
@@ -62,7 +69,8 @@ public class CarController<ACar extends Move> {
             }
         }
     }
-
+ */
+    /*
     // Functions below //
     public void setView(CarView frame) {
         this.frame = frame;
@@ -74,40 +82,37 @@ public class CarController<ACar extends Move> {
         CarController<Move> cc = new CarController<>(workshopVolvo240);
 
 
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Saab95());
-        cc.cars.add(new Scania());
+        cc.model.getCars().add(new Volvo240());
+        cc.model.getCars().add(new Saab95());
+        cc.model.getCars().add(new Scania());
 
-        for (int i = 0; i < cc.cars.size(); i++) {
-            cc.cars.get(i).setY(i * 100);
+        for (int i = 0; i < cc.model.getCars().size(); i++) {
+            cc.model.getCars().get(i).setY(i * 100);
         }
 
         // Start a new view and send a reference of self
-        CarView view = new CarView("CarSim 1.0");
+        CarView view = new CarView("model.getCars()im 1.0");
         cc.setView(view);
         cc.ButtonListerers();
         cc.initializeCarPosition();
         // Start the timer
         cc.timer.start();
     }
-
-    public void initializeCarPosition() {
-        for (int i = 0; i < cars.size(); i++) {
-            int x = (int) cars.get(i).getX();
-            int y = (int) cars.get(i).getY();
-            frame.updateCarPosition(i, x, y);
-        }
-        frame.repaint();
-    }
+    */
 
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
+    /* Each step the TimerListener moves all the model.getCars() in the list and tells the
      * view to update its images. Change this method to your needs.
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (int i = 0; i < cars.size(); i++) {
-                ACar car = cars.get(i);
+            for (Move car : model.getCars()) {
+                car.move();
+            }
+            frame.repaintDrawPanel();
+            /*
+            for (int i = 0; i < model.getCars().size(); i++) {
+                Move car = model.getCars().get(i);
 
                 car.move();
                 int x = (int) Math.round(car.getX());
@@ -120,6 +125,7 @@ public class CarController<ACar extends Move> {
             frame.repaintDrawPanel();
             Collision();
             volvocol();
+            */
         }
     }
 
@@ -138,36 +144,40 @@ public class CarController<ACar extends Move> {
     // Calls the gas method for each vehicle once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (ACar car : cars) {
+        for (Move car : model.getCars()) {
             car.gas(gas);
         }
     }
+
     // Calls the brake method for each vehicle once
     void brake(int amount) {
         double brake = ((double) amount / 100);
-        for (ACar car : cars) {
+        for (Move car : model.getCars()) {
             car.brake((brake));
         }
     }
+
     // Calls turn turbo on method for all vehicles that has turbo
     void turboOn() {
-        for (ACar car : cars) {
+        for (Move car : model.getCars()) {
             if (car instanceof ITurbo turboCar) {
                 turboCar.setTurboOn();
             }
         }
     }
+
     // Calls turn turbo off method for all vehicles that has turbo
     void turboOff() {
-        for (ACar car : cars) {
+        for (Move car : model.getCars()) {
             if (car instanceof ITurbo turboCar) {
                 turboCar.setTurboOff();
             }
         }
     }
+
     // Calls platform method for all trucks.
     void raisePlatform(double angle) {
-        for (ACar car : cars) {
+        for (Move car : model.getCars()) {
             if (car instanceof ITruck truck) {
                 truck.platform(angle); // Var 0 = plattan uppe????
             }
@@ -175,7 +185,7 @@ public class CarController<ACar extends Move> {
     }
 
     void lowerPlatform(double angle) {
-        for (ACar car : cars) {
+        for (Move car : model.getCars()) {
             if (car instanceof ITruck truck) {
                 truck.platform(angle);
             }
@@ -183,24 +193,30 @@ public class CarController<ACar extends Move> {
     }
 
     void startEngine() {
-        for (ACar car : cars) {
+        for (Move car : model.getCars()) {
             car.startEngine();
         }
     }
 
     // Calls stop engine method for all vehicles.
     void stopEngine() {
-        for (ACar car : cars) {
+        for (Move car : model.getCars()) {
             car.stopEngine();
         }
     }
+
+    void start() {
+        timer.start();
+    }
+}
+
     // Specialised collision check for
-    void volvocol() {
+    /*void volvocol() {
         Point volvoWorkshop = frame.getVolvoWorkshop();
         double volvoWorkshopX = volvoWorkshop.getX();
         double volvoWorkshopY = volvoWorkshop.getY();
 
-        for (ACar car: cars) {
+        for (Move car: model.getCars()) {
             if ((car.getX() <= volvoWorkshopX + 20) && (car.getX() >= volvoWorkshopX - 20)
                     && (car.getY() <= volvoWorkshopY + 20) && (car.getY() >= volvoWorkshopY - 20)) {
                 if (workshopVolvo240.addCar(car)) { // Add into a specialized Volvo240 workshop.
@@ -212,4 +228,4 @@ public class CarController<ACar extends Move> {
             }
         }
     }
-}
+}*/
