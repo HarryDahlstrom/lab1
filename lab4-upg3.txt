@@ -5,48 +5,64 @@ Observer, Factory Method, State, Composite. För vart och ett av dessa fyra desi
     a. Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
        Vilka designproblem löste ni genom att använda det?
 
-       Vi använder Observer i vår CarController för att hämta input information från CarView för att sedan
-       uppdatera vårt feed. ButtonListeners hämtar in uppdaterad data.
+           Vi använder Observer i vår CarController för att hämta input information från CarView för att sedan
+           uppdatera vårt feed. ButtonListeners hämtar in uppdaterad data.
 
     b. Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
        Vilka designproblem skulle ni lösa genom att använda det? Om inte,
        varför skulle er design inte förbättras av att använda det?
 
-       Vi finner inte riktigt behovet av detta i någon annanstans i vår kod. Anledningen är
-       att det endast är i CarController delen som nya data uppdateras under körning av programmet,
-       detta löses ju då med ButtonListeners som lyssnar/uppdaterar input:en från CarView.
+           Vi finner inte riktigt behovet av detta i någon annanstans i vår kod. Anledningen är
+           att det endast är i CarController delen som nya data uppdateras under körning av programmet,
+           detta löses ju då med ButtonListeners som lyssnar/uppdaterar input:en från CarView.
 
 2. Factory Method
 
     a. Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
        Vilka designproblem löste ni genom att använda det?
 
-       Vi ser inte att vi använder denna metod just nu, men upplever inte heller att det är behövligt så
-       vårt program är uppbyggt.
+           Vi ser inte att vi använder denna metod just nu, men upplever inte heller att det är behövligt så
+           vårt program är uppbyggt.
 
     b. Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
        Vilka designproblem skulle ni lösa genom att använda det? Om inte,
        varför skulle er design inte förbättras av att använda det?
 
-       Men, tjuvkikar framåt till uppgift 5 i labben så är detta väldigt rimligt att ha i vår kod för att
-       enklare kunna lägga till/ ta bort bilar utefter klientens förfrågan
+           Men, tjuvkikar framåt till uppgift 5 i labben så är detta väldigt rimligt att ha i vår kod för att
+           enklare kunna lägga till/ ta bort bilar utefter klientens förfrågan
 
 3. State
 
     a. Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
        Vilka designproblem löste ni genom att använda det?
 
+           Vi använder oss utav state True/False för att se ifall flaket på en lastbil är uppe eller ej.
+           Detta för att kontrollera ifall att lastbilen får lov att börja rulla eller ej.
 
+           EngineOn/Off använder sig också utav state i engineStatus för buttons. D.v.s. en toggle
 
     b. Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
        Vilka designproblem skulle ni lösa genom att använda det? Om inte,
        varför skulle er design inte förbättras av att använda det?
+
+           Vi finner inte riktigt något mer ställe i vår kod där State hade nyttjat. Vi har inte så mycket
+           ställen där en variabel "togglar" mellan olika satta states.
 
 4. Composite
 
     a. Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
        Vilka designproblem löste ni genom att använda det?
 
+           Vi finner inte att vi använder oss av composite i dagsläget.
+
     b. Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
        Vilka designproblem skulle ni lösa genom att använda det? Om inte,
        varför skulle er design inte förbättras av att använda det?
+
+           Ett ställe man eventuellt hade kunnat använda det är i vår fordonsdel. Men samtidigt tycker vi att
+           arvs hierarkin ger oss det vi önskar enligt vår design. Allt nås på ett enkelt sätt och programmet
+           förblir väldigt modulärt enligt vår nuvarande design
+
+
+
+
