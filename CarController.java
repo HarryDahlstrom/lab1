@@ -15,90 +15,15 @@ public class CarController {
     // member fields:
     private LeModel model;
     private CarView frame; // The frame that represents this instance View of the MVC pattern
-    // private WorkshopVolvo240 workshopVolvo240;
-    // private final int delay = 50; // The delay (ms) corresponds to 20 updates a sec (hz)
     private Timer timer; //= new Timer(delay, new TimerListener()); // timer with listener
 
     public CarController(LeModel model, CarView frame /*WorkshopVolvo240 workshopVolvo240*/) {
         // this.workshopVolvo240 = workshopVolvo240;
         this.model = model;
         this.frame = frame;
-
         ButtonListerers();
-
         timer = new Timer(50, new TimerListener());
     }
-
-
-    // ArrayList<Move> model.getCars() = new ArrayList<>(); // A list of model.getCars(), modify if needed
-
-
-    // TODO tror vi ska flytta detta då det bedömt bryter mot MVC?
-    /*private void Collision() {
-        int planeWidth = frame.getPanelWidth();
-        int planeHeight = frame.getPanelHeight();
-
-        for (int i = 0; i < model.getCars().size(); i++) {
-            Move car = model.getCars().get(i);
-
-            int carWidth = frame.drawPanel.images.get(i).getWidth();
-            int carHeight = frame.drawPanel.images.get(i).getHeight();
-
-            boolean collided = false;
-
-            // Check if collision with left x, right x, upper y, lower y
-            if (car.getX() < 0) {
-                car.setX(0);
-                collided = true;
-            } else if ((car.getX() > planeWidth - carWidth) && (car.getX() < 10000)) {
-                // car.getX() < 10000 since 10000 is location for model.getCars() loaded in workshop.
-                car.setX(planeWidth - carWidth);
-                collided = true;
-            } else if (car.getY() < 0) {
-                car.setX(0);
-                collided = true;
-            } else if (car.getY() > planeHeight - carHeight) {
-                car.setY(planeHeight - carHeight);
-                collided = true;
-            }
-
-            // Turn around
-            if (collided) {
-                car.turnLeft();
-                car.turnLeft();
-            }
-        }
-    }
- */
-    /*
-    // Functions below //
-    public void setView(CarView frame) {
-        this.frame = frame;
-    }
-
-    public static void main(String[] args) {
-        WorkshopVolvo240 workshopVolvo240 = new WorkshopVolvo240(5);
-        // Instance of this class
-        CarController<Move> cc = new CarController<>(workshopVolvo240);
-
-
-        cc.model.getCars().add(new Volvo240());
-        cc.model.getCars().add(new Saab95());
-        cc.model.getCars().add(new Scania());
-
-        for (int i = 0; i < cc.model.getCars().size(); i++) {
-            cc.model.getCars().get(i).setY(i * 100);
-        }
-
-        // Start a new view and send a reference of self
-        CarView view = new CarView("model.getCars()im 1.0");
-        cc.setView(view);
-        cc.ButtonListerers();
-        cc.initializeCarPosition();
-        // Start the timer
-        cc.timer.start();
-    }
-    */
 
 
     /* Each step the TimerListener moves all the model.getCars() in the list and tells the
@@ -110,22 +35,6 @@ public class CarController {
                 car.move();
             }
             frame.repaintDrawPanel();
-            /*
-            for (int i = 0; i < model.getCars().size(); i++) {
-                Move car = model.getCars().get(i);
-
-                car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-
-                frame.updateCarPosition(i, x, y);
-                // repaint() calls the paintComponent method of the panel
-
-            }
-            frame.repaintDrawPanel();
-            Collision();
-            volvocol();
-            */
         }
     }
 

@@ -13,17 +13,21 @@ abstract class LeTruck extends Move implements StartEngine{
 
     // Functions for LeTruck below //
     @Override
-    public void startEngine(){
+    public void startEngine() {
         // Om vi kör så kommer inget hända.
-        if (bedUp) {
-            if (!getEngineStatus()) {
-                setCurrentSpeed(0.1);
-                setEngineStatus(true);
-            }
-        } else if (!bedUp && !getEngineStatus()) {
-            setEngineStatus(true); // Startar lastbil utan att börja åka
+        if (bedUp && !getEngineStatus()){
+            setCurrentSpeed(0.1);
+            setEngineStatus(true);
+        }
+        if (bedUp && getEngineStatus()) {
+            System.out.println("Engine is already on");
+        }
+        else {
+            setEngineStatus(true);
         }
     }
+
+
 
     public void platform(double angleIncrement) {
         if (getCurrentSpeed() == 0) {
@@ -33,8 +37,13 @@ abstract class LeTruck extends Move implements StartEngine{
         }
         if (currentAngle == 0) {
             bedUp = true;
-        }
-        else bedUp = false;
+        } else bedUp = false;
+    if (bedUp) {
+        System.out.println("Bed is now up");
+    }
+    else  {
+        System.out.println("Bed is now down");
+    }
     }
 
     protected double speedFactor() {

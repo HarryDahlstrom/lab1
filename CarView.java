@@ -39,25 +39,7 @@ public class CarView extends JFrame{
 
         this.add(drawPanel);
 
-        /* SpinnerModel spinnerModel =
-                new SpinnerNumberModel(0, //initial value
-                        0, //min
-                        100, //max
-                        1);//step
-        gasSpinner = new JSpinner(spinnerModel);
 
-        gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
-            }
-        });
-        JPanel gasPanel = new JPanel();
-
-        gasPanel.setLayout(new BorderLayout());
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
-        this.add(gasPanel);
-        */
         gasSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
         JPanel gasPanel = new JPanel();
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
@@ -81,19 +63,10 @@ public class CarView extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    /* public DrawPanel getDrawPanel() {
-        return drawPanel;
-    } */
 
     public Map<ButtonType, JButton> getAllButtons() {
         return controlPanel.getAllButtons();
     }
-
-    /* public void updateCarPosition(int index, int x, int y) {
-        drawPanel.moveit(index, x, y);
-    }
-
-     */
 
     public int getGasAmount() {
         return (int) gasSpinner.getValue();
@@ -103,7 +76,7 @@ public class CarView extends JFrame{
         drawPanel.repaint();
     }
 
-
+    // elp
     public Point getVolvoWorkshop() {
         return drawPanel.getVolvoWorkshop();
     }
