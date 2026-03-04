@@ -4,7 +4,7 @@ abstract class LeTruck extends Move implements StartEngine{
 
     // Local variables //
     protected double currentAngle = 0;
-    protected boolean bedUp;
+    protected boolean bedUp = true;
 
     // Constructor below //
     public LeTruck(int nrDoors, Color color, double enginePower, String modelName, String type) {
@@ -16,7 +16,10 @@ abstract class LeTruck extends Move implements StartEngine{
     public void startEngine(){
         // Om vi kör så kommer inget hända.
         if (bedUp) {
-            startEngine();
+            if (!getEngineStatus()) {
+                setCurrentSpeed(0.1);
+                setEngineStatus(true);
+            }
         } else if (!bedUp && !getEngineStatus()) {
             setEngineStatus(true); // Startar lastbil utan att börja åka
         }

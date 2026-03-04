@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -26,12 +27,13 @@ public class LeModel {
     }
 
     public List<Move> getCars() {
-        return cars;
+        return Collections.unmodifiableList(cars);
     }
 
 
     private void collision() {
         // TODO: Add collision logic here?
+        /*
             for (int i = 0; i < cars.size(); i++) {
                 Move car = cars.get(i);
 
@@ -62,6 +64,8 @@ public class LeModel {
                     car.turnLeft();
                 }
             }
+
+         */
     }
 
     private void handleWorkshop() {
