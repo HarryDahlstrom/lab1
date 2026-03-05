@@ -48,6 +48,8 @@ public class CarController {
         frame.getAllButtons().get(ButtonType.PLATFORMDOWN).addActionListener(e -> lowerPlatform(50));
         frame.getAllButtons().get(ButtonType.START).addActionListener(e -> startEngine());
         frame.getAllButtons().get(ButtonType.STOP).addActionListener(e -> stopEngine());
+        frame.getAllButtons().get(ButtonType.ADDCAR).addActionListener(e -> addCar());
+        frame.getAllButtons().get(ButtonType.REMOVECAR).addActionListener(e -> stopEngine());
     }
 
     // Calls the gas method for each vehicle once
@@ -104,6 +106,7 @@ public class CarController {
     void startEngine() {
         for (Move car : model.getCars()) {
             car.startEngine();
+            System.out.println("Started all.");
         }
     }
 
@@ -111,13 +114,32 @@ public class CarController {
     void stopEngine() {
         for (Move car : model.getCars()) {
             car.stopEngine();
+            System.out.println("Stopped all.");
         }
     }
 
-    void start() {
+    void start() { // ser ni breakpoint prickarna på vänstersidan? Skulle Dalen vilja ta bort dom snälla jag råkade klicka och kan inte få bort dom ;(
         timer.start();
     }
-}
+
+
+    // TODO addCar function below //
+    // Use Factory method for the function below //
+    void addCar() {
+        // vad jag prata om i discord - hd
+        int temp = (Math.random() <= 0.5 ? 1:2);
+        if (temp == 1) {
+            model.addCar(new Volvo240());
+            System.out.println("New Volvo created!");
+        } else {
+            model.addCar(new Saab95());
+            System.out.println("New Volvo created!");
+        }
+
+
+    }
+
+    //void addCar() {}
 
     // Specialised collision check for
     /*void volvocol() {
@@ -138,3 +160,4 @@ public class CarController {
         }
     }
 }*/
+}

@@ -7,7 +7,7 @@ public class Buttons extends JPanel{
     private Map<ButtonType, JButton> buttons = new LinkedHashMap<>();
 
     public Buttons() {
-        this.setLayout(new GridLayout(2,4));
+        this.setLayout(new GridLayout(2,6));
         this.setBackground(Color.CYAN);
         this.setPreferredSize(new Dimension(400, 200));
 
@@ -22,6 +22,8 @@ public class Buttons extends JPanel{
         buttons.put(ButtonType.TURBOOFF, new TurboOffButton());
         buttons.put(ButtonType.PLATFORMDOWN, new PlatformDownButton());
         buttons.put(ButtonType.STOP, new StopButton());
+        buttons.put(ButtonType.ADDCAR, new AddCarButton());
+        buttons.put(ButtonType.REMOVECAR, new RemoveCarButton());
 
         // Creates le buttoons
         for (JButton button : buttons.values()) {
