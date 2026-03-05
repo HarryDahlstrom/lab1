@@ -3,14 +3,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 // This panel represents the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
 
     private LeModel model;
-    private ArrayList<BufferedImage> images = new ArrayList<>();
+    private Map<Class<?>, BufferedImage> images = new HashMap<>();
     //ArrayList<Point> carPoints = new ArrayList<>();
 
     private BufferedImage volvoWorkshopImage;
@@ -43,14 +44,13 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            BufferedImage volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
-            images.add(volvoImage);
+            images.put(Volvo240.class, ImageIO.read(getClass().getResourceAsStream("pics/volvo240.jpg")));
 
-            BufferedImage saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
-            images.add(saabImage);
+            images.put(Saab95.class, ImageIO.read(getClass().getResourceAsStream("pics/saab95.jpg")));
+            //BufferedImage saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
+            //images.add(saabImage);
 
-            BufferedImage scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
-            images.add(scaniaImage);
+            images.put(Scania.class, ImageIO.read(getClass().getResourceAsStream("pics/scania.jpg")));
 
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
         } catch (IOException ex)
@@ -65,9 +65,15 @@ public class DrawPanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (int i = 0; i < images.size(); i++) {
+        for (Move vehicle : model.getCars()) {
+            BufferedImage img = images.get(vehicle.getClass());
+            g.drawImage(img, (int) vehicle.getX(), (int) vehicle.getY(), null);
+
+            /*
             Move vehicle = model.getCars().get(i);
             g.drawImage(images.get(i), (int) vehicle.getX(), (int) vehicle.getY(), null);
+
+             */
         }
 
         //g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters

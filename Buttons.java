@@ -17,13 +17,13 @@ public class Buttons extends JPanel{
         buttons.put(ButtonType.TURBOON, new TurboOnButton());
         buttons.put(ButtonType.PLATFORMUP, new PlatformUpButton());
         buttons.put(ButtonType.START, new StartButton());
+        buttons.put(ButtonType.ADDCAR, new AddCarButton());
         // Bottom row
         buttons.put(ButtonType.BRAKE, new BrakeButton());
         buttons.put(ButtonType.TURBOOFF, new TurboOffButton());
         buttons.put(ButtonType.PLATFORMDOWN, new PlatformDownButton());
         buttons.put(ButtonType.STOP, new StopButton());
-        buttons.put(ButtonType.ADDCAR, new AddCarButton());
-        buttons.put(ButtonType.REMOVECAR, new RemoveCarButton());
+        buttons.put(ButtonType.REMOVECAR, new RemoveCarButton()); // TEMP ÄNDRA TILL REMOVE CAR!!!
 
         // Creates le buttoons
         for (JButton button : buttons.values()) {

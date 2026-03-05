@@ -31,25 +31,23 @@ public class CarController {
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Move car : model.getCars()) {
-                car.move();
-            }
+            model.update();
             frame.repaintDrawPanel();
         }
     }
 
     public void ButtonListerers() {
+
         frame.getAllButtons().get(ButtonType.GAS).addActionListener(e -> gas(frame.getGasAmount()));
         frame.getAllButtons().get(ButtonType.BRAKE).addActionListener(e -> brake(frame.getGasAmount()));
         frame.getAllButtons().get(ButtonType.TURBOON).addActionListener(e -> turboOn());
         frame.getAllButtons().get(ButtonType.TURBOOFF).addActionListener(e -> turboOff());
-        frame.getAllButtons().get(ButtonType.PLATFORMUP).addActionListener(e -> raisePlatform(0));
-        // Vad var vinkeln för om den var uppe/nere? 0 = uppe va??
-        frame.getAllButtons().get(ButtonType.PLATFORMDOWN).addActionListener(e -> lowerPlatform(50));
+        frame.getAllButtons().get(ButtonType.PLATFORMUP).addActionListener(e -> platformController(0));
+        frame.getAllButtons().get(ButtonType.PLATFORMDOWN).addActionListener(e -> platformController(50));
         frame.getAllButtons().get(ButtonType.START).addActionListener(e -> startEngine());
         frame.getAllButtons().get(ButtonType.STOP).addActionListener(e -> stopEngine());
         frame.getAllButtons().get(ButtonType.ADDCAR).addActionListener(e -> addCar());
-        frame.getAllButtons().get(ButtonType.REMOVECAR).addActionListener(e -> stopEngine());
+        frame.getAllButtons().get(ButtonType.REMOVECAR).addActionListener(e -> removeCar()); // CHANGE TO removeCar()
     }
 
     // Calls the gas method for each vehicle once
@@ -87,15 +85,7 @@ public class CarController {
     }
 
     // Calls platform method for all trucks.
-    void raisePlatform(double angle) {
-        for (Move car : model.getCars()) {
-            if (car instanceof ITruck truck) {
-                truck.platform(angle); // Var 0 = plattan uppe????
-            }
-        }
-    }
-
-    void lowerPlatform(double angle) {
+    void platformController(double angle) {
         for (Move car : model.getCars()) {
             if (car instanceof ITruck truck) {
                 truck.platform(angle);
@@ -103,22 +93,23 @@ public class CarController {
         }
     }
 
+
     void startEngine() {
         for (Move car : model.getCars()) {
             car.startEngine();
-            System.out.println("Started all.");
         }
+        System.out.println("Started all.");
     }
 
     // Calls stop engine method for all vehicles.
     void stopEngine() {
         for (Move car : model.getCars()) {
             car.stopEngine();
-            System.out.println("Stopped all.");
         }
+        System.out.println("Stopped all.");
     }
 
-    void start() { // ser ni breakpoint prickarna på vänstersidan? Skulle Dalen vilja ta bort dom snälla jag råkade klicka och kan inte få bort dom ;(
+    void start() {
         timer.start();
     }
 
@@ -126,20 +117,13 @@ public class CarController {
     // TODO addCar function below //
     // Use Factory method for the function below //
     void addCar() {
-        // vad jag prata om i discord - hd
-        int temp = (Math.random() <= 0.5 ? 1:2);
-        if (temp == 1) {
-            model.addCar(new Volvo240());
-            System.out.println("New Volvo created!");
-        } else {
-            model.addCar(new Saab95());
-            System.out.println("New Volvo created!");
-        }
-
-
+        Move car = AddLeCar.createRandomCar();
+        model.addCar(car);
     }
 
-    //void addCar() {}
+    void removeCar() {
+        model.removeCar();
+    }
 
     // Specialised collision check for
     /*void volvocol() {
