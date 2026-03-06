@@ -37,7 +37,7 @@ public class CarController {
     }
 
     public void ButtonListerers() {
-
+        // Sets which buttons do what. Buttons: GAS, BRAKE, START. Actions: e -> gas(), e -> brake(), e -> startEngine()
         frame.getAllButtons().get(ButtonType.GAS).addActionListener(e -> gas(frame.getGasAmount()));
         frame.getAllButtons().get(ButtonType.BRAKE).addActionListener(e -> brake(frame.getGasAmount()));
         frame.getAllButtons().get(ButtonType.TURBOON).addActionListener(e -> turboOn());
@@ -56,6 +56,7 @@ public class CarController {
         for (Move car : model.getCars()) {
             car.gas(gas);
         }
+        System.out.println("Vehicles accelerated with: " + amount + " % of max.");
     }
 
     // Calls the brake method for each vehicle once
@@ -64,15 +65,17 @@ public class CarController {
         for (Move car : model.getCars()) {
             car.brake((brake));
         }
+        System.out.println("Vehicles braked with: " + amount + " % of max.");
     }
 
     // Calls turn turbo on method for all vehicles that has turbo
-    void turboOn() {
+    protected void turboOn() {
         for (Move car : model.getCars()) {
             if (car instanceof ITurbo turboCar) {
                 turboCar.setTurboOn();
             }
         }
+        System.out.println("Turbo on");
     }
 
     // Calls turn turbo off method for all vehicles that has turbo
@@ -82,6 +85,7 @@ public class CarController {
                 turboCar.setTurboOff();
             }
         }
+        System.out.println("Turbo off");
     }
 
     // Calls platform method for all trucks.
@@ -93,7 +97,7 @@ public class CarController {
         }
     }
 
-
+    // Starts engine for all vehicles. Will make vehicles start moving if possible.
     void startEngine() {
         for (Move car : model.getCars()) {
             car.startEngine();
@@ -109,39 +113,17 @@ public class CarController {
         System.out.println("Stopped all.");
     }
 
-    void start() {
-        timer.start();
-    }
-
-
-    // TODO addCar function below //
-    // Use Factory method for the function below //
-    void addCar() {
+    // Adds random car, only up to 10 cars may exist.
+    private void addCar() {
         Move car = AddLeCar.createRandomCar();
         model.addCar(car);
     }
-
-    void removeCar() {
+    // Removes latest added car.
+    private void removeCar() {
         model.removeCar();
     }
-
-    // Specialised collision check for
-    /*void volvocol() {
-        Point volvoWorkshop = frame.getVolvoWorkshop();
-        double volvoWorkshopX = volvoWorkshop.getX();
-        double volvoWorkshopY = volvoWorkshop.getY();
-
-        for (Move car: model.getCars()) {
-            if ((car.getX() <= volvoWorkshopX + 20) && (car.getX() >= volvoWorkshopX - 20)
-                    && (car.getY() <= volvoWorkshopY + 20) && (car.getY() >= volvoWorkshopY - 20)) {
-                if (workshopVolvo240.addCar(car)) { // Add into a specialized Volvo240 workshop.
-                    car.setCurrentSpeed(0.0);
-                    car.setX(volvoWorkshopX + 10000); // + 10000 For collision check workaround.
-                    car.setY(volvoWorkshopY);
-                    car.stopEngine();
-                }
-            }
-        }
+    // Function to start timer.
+    protected void start() {
+        timer.start();
     }
-}*/
 }

@@ -11,9 +11,6 @@ import java.util.Map;
  **/
 
 public class CarView extends JFrame{
-    //private static final int X = 800;
-    //private static final int Y = 800;
-
     private DrawPanel drawPanel;
     private Buttons controlPanel;
     private JSpinner gasSpinner;
@@ -26,8 +23,7 @@ public class CarView extends JFrame{
     }
 
 
-    // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
+    // Sets everything in place and fits everythingk
     private void initComponents(String title) {
         this.drawPanel = new DrawPanel(model);
         this.controlPanel = new Buttons();
@@ -47,7 +43,7 @@ public class CarView extends JFrame{
         this.add(gasPanel);
 
         controlPanel.setPreferredSize(new Dimension((x/2)+4, 200));
-        controlPanel.setBackground(Color.GREEN);
+        controlPanel.setBackground(Color.WHITE); // ...
         this.add(controlPanel);
 
         // Make the frame pack all it's components by respecting the sizes if possible.
@@ -77,10 +73,4 @@ public class CarView extends JFrame{
     public void repaintDrawPanel() {
         drawPanel.repaint();
     }
-
-    // elp
-    public Point getVolvoWorkshop() {
-        return drawPanel.getVolvoWorkshop();
-    }
-
 }

@@ -11,7 +11,7 @@ public class Buttons extends JPanel{
         this.setBackground(Color.CYAN);
         this.setPreferredSize(new Dimension(400, 200));
 
-        // Buttons
+        // Buttons //
         // Top row
         buttons.put(ButtonType.GAS, new GasButton());
         buttons.put(ButtonType.TURBOON, new TurboOnButton());
@@ -30,11 +30,6 @@ public class Buttons extends JPanel{
             this.add(button);
         }
     }
-
-    /* public JButton getButton(ButtonType type) {
-        return buttons.get(type);
-    }*/
-
     public Map<ButtonType, JButton> getAllButtons() {
         return buttons;
     }

@@ -5,7 +5,6 @@ import java.util.Objects;
 
 abstract class Workshop<C extends IWorkshop> {
 
-
     // Global variables //
     List<C> carsInWorkshop = new ArrayList<>();
     protected int nrCars;

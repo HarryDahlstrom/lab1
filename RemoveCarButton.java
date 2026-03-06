@@ -4,6 +4,6 @@ import java.awt.*;
 public class RemoveCarButton extends JButton {
     public RemoveCarButton() {
         super("Remove Car");
-        this.setBackground(Color.RED);
+        this.setBackground(Color.GRAY);
     }
 }
