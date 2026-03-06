@@ -43,23 +43,9 @@ public class LeModel {
 
     protected void removeCar() {
 
-        if (!getCars().isEmpty()) {
-            if (getCars().size() != 1) {
-                for (int i = (getCars().size() - 1); i > 0; i--) {
-                    if (cars.get(i).getType().equals("Car")) {
-                        cars.remove(i);
-                        System.out.println("Removed car.");
-                    } else {
-                        System.out.println("Didn't remove: " + getCars().get(getCars().size()-1).getClass().getSimpleName());
-                    }
-                }
-            } else {
-                cars.remove(0);
-                System.out.println("Removed last car.");
-            }
-
-        } else {
-            System.out.println("No cars to remove.");
+        if (!cars.isEmpty()) {
+            cars.remove(cars.size() - 1);
+            System.out.println("Removed car: " + cars.get(cars.size() - 1).getClass().getSimpleName());
         }
     }
 
