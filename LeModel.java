@@ -45,7 +45,10 @@ public class LeModel {
 
         if (!cars.isEmpty()) {
             cars.remove(cars.size() - 1);
-            System.out.println("Removed car: " + cars.get(cars.size() - 1).getClass().getSimpleName());
+            System.out.println("Car removed");
+        }
+        else {
+            System.out.println("No cars to remove");
         }
     }
 
